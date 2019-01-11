@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d68f947-a147-4cb5-bade-0d463305032d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/acrophobia_system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/acrophobia_system.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,18 +35,18 @@
         <counts>
           <entry key="project.closed" value="3" />
           <entry key="project.open.time.28" value="1" />
-          <entry key="project.open.time.7" value="1" />
+          <entry key="project.open.time.7" value="2" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.71529174">
+    <splitter split-orientation="horizontal" split-proportion="0.77208745">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/python-fitbit/python-fitbit.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="533">
@@ -59,10 +58,10 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/TensorFlow.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="391">
+                <state relative-caret-position="510">
                   <caret line="30" column="63" selection-start-line="30" selection-start-column="63" selection-end-line="30" selection-end-column="63" />
                   <folding>
                     <element signature="e#81#93#0" expanded="true" />
@@ -170,7 +169,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -299,15 +298,15 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="3856" height="2176" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4950884" visible="true" weight="0.11986301" />
-      <window_info id="Structure" order="1" sideWeight="0.5049116" side_tool="true" visible="true" weight="0.11986301" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4945126" visible="true" weight="0.120389886" />
+      <window_info id="Structure" order="1" sideWeight="0.5054874" side_tool="true" visible="true" weight="0.120389886" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Run" order="0" sideWeight="0.5026652" side_tool="true" weight="0.29637307" />
-      <window_info active="true" anchor="bottom" id="Event Log" order="1" sideWeight="0.5028978" side_tool="true" visible="true" weight="0.25220373" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="1" sideWeight="0.50316125" side_tool="true" visible="true" weight="0.24142997" />
       <window_info anchor="bottom" id="Database Changes" order="2" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="3" />
       <window_info anchor="bottom" id="Python Console" order="4" sideWeight="0.4977612" weight="0.32911393" />
-      <window_info anchor="bottom" id="Terminal" order="5" sideWeight="0.4971022" visible="true" weight="0.25220373" />
+      <window_info anchor="bottom" id="Terminal" order="5" sideWeight="0.49683878" visible="true" weight="0.24142997" />
       <window_info anchor="bottom" id="Docker" order="6" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="7" />
       <window_info anchor="bottom" id="Find" order="8" />
@@ -329,6 +328,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/python-fitbit" />
+    </ignored-roots>
     <MESSAGE value="new version" />
     <option name="LAST_COMMIT_MESSAGE" value="new version" />
   </component>
@@ -347,12 +349,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TensorFlow.py">
+    <entry file="file://$PROJECT_DIR$/python-fitbit/python-fitbit.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="30" column="63" selection-start-line="30" selection-start-column="63" selection-end-line="30" selection-end-column="63" />
+        <state relative-caret-position="533">
+          <caret line="71" column="28" selection-start-line="71" selection-start-column="28" selection-end-line="71" selection-end-column="28" />
           <folding>
-            <element signature="e#81#93#0" expanded="true" />
+            <element signature="e#21#36#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -370,12 +372,12 @@
     <entry file="file://$PROJECT_DIR$/python-fitbit/log.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/python-fitbit/python-fitbit.py">
+    <entry file="file://$PROJECT_DIR$/TensorFlow.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="533">
-          <caret line="71" column="28" selection-start-line="71" selection-start-column="28" selection-end-line="71" selection-end-column="28" />
+        <state relative-caret-position="510">
+          <caret line="30" column="63" selection-start-line="30" selection-start-column="63" selection-end-line="30" selection-end-column="63" />
           <folding>
-            <element signature="e#21#36#0" expanded="true" />
+            <element signature="e#81#93#0" expanded="true" />
           </folding>
         </state>
       </provider>
