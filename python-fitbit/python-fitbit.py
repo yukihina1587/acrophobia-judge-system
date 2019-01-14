@@ -26,6 +26,8 @@ ACCESS_TOKEN = ""
 REFRESH_TOKEN = ""
 FITBIT_BASE_URL = "https://api.fitbit.com/"
 
+import pandas as pd
+
 
 def getHeartRate():
     """
@@ -34,9 +36,9 @@ def getHeartRate():
     api_ver = "1"
     detail_level = "1sec"
     # date =(datetime.now()+timedelta(days=-1)).strftime('%Y-%m-%d')
-    date = "2018-11-07"
-    start_time = "00:00"
-    end_time = "23:59"
+    date = "2018-12-24"
+    start_time = "12:00"
+    end_time = "13:00"
     url = FITBIT_BASE_URL + api_ver + "/user/-/activities/heart/date/" + \
           date + "/1d/" + detail_level + "/time/" + start_time + "/" + \
           end_time + ".json"
@@ -59,7 +61,7 @@ def showTable(res_str):
     today = (datetime.now()+timedelta(days=-1)).strftime("%Y-%m-%d")
 
     # file = open(today+'.txt', 'w')  # 書き込みモードでオープン
-    file = open('2018-11-07.txt', 'w')
+    file = open('2018-12-24.txt', 'w')
 
     for data in datas:
         heart_rate_list = []
