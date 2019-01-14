@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d68f947-a147-4cb5-bade-0d463305032d" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/LSTM_for_pNN50.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/python-fitbit/python-fitbit.py" beforeDir="false" afterPath="$PROJECT_DIR$/python-fitbit/python-fitbit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TensorFlow.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/python-fitbit/TensorFlow.py" beforeDir="false" afterPath="$PROJECT_DIR$/python-fitbit/Text_to_graph.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,23 +47,27 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="ipynb" value="1" />
-          <entry key="py" value="2" />
+          <entry key="py" value="3" />
+          <entry key="txt" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="IPNB" value="1" />
-          <entry key="Python" value="2" />
+          <entry key="PLAIN_TEXT" value="4" />
+          <entry key="Python" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="45" />
+          <entry key="dummy" value="35" />
+          <entry key="py" value="1076" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="45" />
+          <entry key="PLAIN_TEXT" value="35" />
+          <entry key="Python" value="1076" />
         </counts>
       </usages-collector>
     </session>
@@ -70,11 +76,11 @@
     <splitter split-orientation="horizontal" split-proportion="0.77208745">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/python-fitbit/python-fitbit.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2023">
-                  <caret line="122" column="62" selection-start-line="122" selection-start-column="62" selection-end-line="122" selection-end-column="62" />
+                <state relative-caret-position="808">
+                  <caret line="78" column="16" lean-forward="true" selection-start-line="78" selection-start-column="16" selection-end-line="78" selection-end-column="16" />
                   <folding>
                     <element signature="e#21#36#0" expanded="true" />
                   </folding>
@@ -82,13 +88,22 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/TensorFlow.py">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/python-fitbit/Text_to_graph.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="391">
-                  <caret line="30" column="63" selection-start-line="30" selection-start-column="63" selection-end-line="30" selection-end-column="63" />
+                <state relative-caret-position="754">
+                  <caret line="53" column="16" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/LSTM_for_pNN50.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="595">
+                  <caret line="35" column="20" lean-forward="true" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
                   <folding>
-                    <element signature="e#81#93#0" expanded="true" />
+                    <element signature="e#54#63#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -97,7 +112,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/python-fitbit/RNN+Plots-LSTM.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="578">
+                <state relative-caret-position="663">
                   <caret line="39" column="75" selection-start-line="39" selection-start-column="75" selection-end-line="39" selection-end-column="75" />
                   <folding>
                     <element signature="e#93#123#0" expanded="true" />
@@ -109,7 +124,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Test/keras_test.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="374">
+                <state relative-caret-position="425">
                   <caret line="25" column="34" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
                   <folding>
                     <element signature="e#19#50#0" expanded="true" />
@@ -127,15 +142,6 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/python-fitbit/fitbit/api.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2142">
-                  <caret line="128" column="52" selection-start-line="128" selection-start-column="52" selection-end-line="128" selection-end-column="52" />
-                </state>
-              </provider>
-            </entry>
-          </file>
         </leaf>
       </split-first>
       <split-second>
@@ -145,9 +151,21 @@
               <provider selected="true" editor-type-id="text-editor" />
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/python-fitbit/log.txt">
               <provider selected="true" editor-type-id="text-editor" />
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/python-fitbit/2018-07-30.txt">
+              <provider selected="true" editor-type-id="text-editor" />
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/python-fitbit/2018-11-07.txt">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-41516" />
+              </provider>
             </entry>
           </file>
         </leaf>
@@ -181,11 +199,13 @@
         <option value="$PROJECT_DIR$/python-fitbit.py" />
         <option value="$PROJECT_DIR$/python-fitbit/automation_module.py" />
         <option value="$PROJECT_DIR$/python-fitbit/TensorFlow.py" />
-        <option value="$PROJECT_DIR$/TensorFlow.py" />
         <option value="$PROJECT_DIR$/python-fitbit/RNN+Plots-LSTM.py" />
         <option value="$PROJECT_DIR$/Test/keras_test.py" />
         <option value="$PROJECT_DIR$/Test/keras_test.ipynb" />
         <option value="$PROJECT_DIR$/python-fitbit/python-fitbit.py" />
+        <option value="$PROJECT_DIR$/TensorFlow.py" />
+        <option value="$PROJECT_DIR$/LSTM_for_pNN50.py" />
+        <option value="$PROJECT_DIR$/python-fitbit/Text_to_graph.py" />
       </list>
     </option>
   </component>
@@ -196,8 +216,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="257" />
-    <option name="y" value="539" />
+    <option name="x" value="685" />
+    <option name="y" value="474" />
     <option name="width" value="2822" />
     <option name="height" value="1558" />
   </component>
@@ -388,7 +408,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="257" y="539" width="2822" height="1558" extended-state="0" />
+    <frame x="685" y="474" width="2822" height="1558" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4927798" visible="true" weight="0.12961622" />
       <window_info id="Structure" order="1" sideWeight="0.5072202" side_tool="true" visible="true" weight="0.12961622" />
@@ -453,19 +474,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TensorFlow.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="30" column="63" selection-start-line="30" selection-start-column="63" selection-end-line="30" selection-end-column="63" />
-          <folding>
-            <element signature="e#81#93#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/python-fitbit/gather_keys_oauth2.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python-fitbit/log.txt">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/python-fitbit/RNN+Plots-LSTM.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
+        <state relative-caret-position="663">
           <caret line="39" column="75" selection-start-line="39" selection-start-column="75" selection-end-line="39" selection-end-column="75" />
           <folding>
             <element signature="e#93#123#0" expanded="true" />
@@ -475,11 +492,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Test/keras_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
+        <state relative-caret-position="425">
           <caret line="25" column="34" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
           <folding>
             <element signature="e#19#50#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python-fitbit/fitbit/api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1026">
+          <caret line="128" column="52" selection-start-line="128" selection-start-column="52" selection-end-line="128" selection-end-column="52" />
         </state>
       </provider>
     </entry>
@@ -490,26 +514,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python-fitbit/fitbit/api.py">
+    <entry file="file://$PROJECT_DIR$/python-fitbit/2018-07-30.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LSTM_for_pNN50.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2142">
-          <caret line="128" column="52" selection-start-line="128" selection-start-column="52" selection-end-line="128" selection-end-column="52" />
+        <state relative-caret-position="595">
+          <caret line="35" column="20" lean-forward="true" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
+          <folding>
+            <element signature="e#54#63#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python-fitbit/gather_keys_oauth2.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/python-fitbit/log.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/python-fitbit/python-fitbit.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2023">
-          <caret line="122" column="62" selection-start-line="122" selection-start-column="62" selection-end-line="122" selection-end-column="62" />
+        <state relative-caret-position="808">
+          <caret line="78" column="16" lean-forward="true" selection-start-line="78" selection-start-column="16" selection-end-line="78" selection-end-column="16" />
           <folding>
             <element signature="e#21#36#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python-fitbit/2018-11-07.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-41516" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python-fitbit/Text_to_graph.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="754">
+          <caret line="53" column="16" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
         </state>
       </provider>
     </entry>
