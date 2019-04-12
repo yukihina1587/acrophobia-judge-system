@@ -1,5 +1,4 @@
 import matplotlib
-# AGG(Anti-Grain Geometry engine)  pngで出力できる
 matplotlib.use('TkAgg')
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -11,44 +10,41 @@ ylist = list()
 pulse = []
 sum = 0
 count = 0
+part = []
 
 for line in f:
     s = line.split("|")
     if(len(s) >= 2 and s[1] != "   TIME   "):
-        # print(s[1])
         xx = s[1]
         xxtime = dt.strptime(xx, ' %H:%M:%S ')
         yy = s[2]
         pulse.append(int(s[2]))
 
         if(xxtime.hour >= 3 and xxtime.minute >= 0 and xxtime.second >= 0):
-            if (xxtime.hour == 4 and xxtime.minute == 0):
+            if (xxtime.hour == 3 and xxtime.minute == 11):
                 break
             xlist.append(xx)
             ylist.append(yy)
-            sum = sum + int(yy)
-            count+= 1
+            part.append(int(yy))
+            sum += int(yy)
+            count += 1
 f.close()
 
 rate = 0
-n = []
 i = 1
-for p in pulse:
-    #print(pulse[p] , end="")
+for p in part:
     x = (p-(sum/count)) ** 2
-    i+=1
-    #n.append(pulse[p+1] - pulse[p])
-    #if n[p] >= 2:
-    #    rate += 1
+    i += 1
 
-print(x)
-SD = (x / count) ** 0.5
-SE = SD / (count ** 0.5)
+S_D_ = 0
+S_E_ = 0
 
-#pNN50 = rate / 50
-#print("pNN50:", pNN50)
+print(x/count)
+S_D_ = (x / count) ** 0.5
+S_E_ = S_D_ / (count ** 0.5)
 
-print("標準偏差:", SE)
+print("標準偏差:", S_D_)
+print("標準誤差:", S_E_)
 
 fig, ax = plt.subplots(figsize=(20, 20))
 ax.plot(xlist , ylist)

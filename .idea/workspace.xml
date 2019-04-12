@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d68f947-a147-4cb5-bade-0d463305032d" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/python-fitbit/prediction_part.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/acrophobia_system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/acrophobia_system.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/keras_test.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Test/keras_test.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/python-fitbit/Text_to_graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/python-fitbit/Text_to_graph.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,23 +30,35 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.7111111">
+    <splitter split-orientation="horizontal" split-proportion="0.7263582">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/python-fitbit/python-fitbit.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1951">
-                  <caret line="16" column="29" lean-forward="true" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
+                <state relative-caret-position="272">
+                  <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/python-fitbit/Text_to_graph.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="935">
+                  <caret line="55" column="19" selection-start-line="55" selection-start-column="19" selection-end-line="55" selection-end-column="19" />
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/python-fitbit/Text_to_graph.py">
+            <entry file="file://$PROJECT_DIR$/python-fitbit/prediction_part.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="102">
-                  <caret line="24" column="55" selection-start-line="24" selection-start-column="55" selection-end-line="24" selection-end-column="55" />
+                <state relative-caret-position="340">
+                  <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
+                  <folding>
+                    <element signature="e#16#25#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -52,7 +66,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/LSTM_for_pNN50.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="595">
+                <state relative-caret-position="408">
                   <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
                   <folding>
                     <element signature="e#54#63#0" expanded="true" />
@@ -106,8 +120,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/python-fitbit/2018-11-07.txt">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="122">
-                  <caret line="2475" column="2" lean-forward="true" selection-start-line="2475" selection-start-column="2" selection-end-line="2475" selection-end-column="10" />
+                <state relative-caret-position="121">
+                  <caret line="2475" column="2" selection-start-line="2475" selection-start-column="2" selection-end-line="2475" selection-end-column="10" />
                 </state>
               </provider>
             </entry>
@@ -119,8 +133,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="Jupyter Notebook" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -150,13 +164,15 @@
         <option value="$PROJECT_DIR$/TensorFlow.py" />
         <option value="$PROJECT_DIR$/LSTM_for_pNN50.py" />
         <option value="$PROJECT_DIR$/python-fitbit/Text_to_graph.py" />
+        <option value="$PROJECT_DIR$/python-fitbit/prediction_part.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-7" />
-    <option name="width" value="974" />
-    <option name="height" value="1087" />
+    <option name="x" value="1719" />
+    <option name="y" value="297" />
+    <option name="width" value="1950" />
+    <option name="height" value="2175" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -169,18 +185,13 @@
         <subPane>
           <expand>
             <path>
-              <item name="acrophobia-judge-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="acrophobia-judge-system" type="462c0819:PsiDirectoryNode" />
+              <item name="Acrophobia-judge-system" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Acrophobia-judge-system" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="acrophobia-judge-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="acrophobia-judge-system" type="462c0819:PsiDirectoryNode" />
+              <item name="Acrophobia-judge-system" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Acrophobia-judge-system" type="462c0819:PsiDirectoryNode" />
               <item name="python-fitbit" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="acrophobia-judge-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="acrophobia-judge-system" type="462c0819:PsiDirectoryNode" />
-              <item name="Test" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -221,7 +232,29 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.python-fitbit (1)">
+  <component name="RunManager" selected="Python.Text_to_graph">
+    <configuration name="Text_to_graph" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="acrophobia_system" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/python-fitbit" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python-fitbit/Text_to_graph.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="keras_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="acrophobia_system" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -288,6 +321,17 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.python-fitbit (1)" />
+      <item itemvalue="Python.Text_to_graph" />
+      <item itemvalue="Python.keras_test" />
+      <item itemvalue="Python.python-fitbit" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.Text_to_graph" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -302,6 +346,10 @@
       <workItem from="1554092065788" duration="3336000" />
       <workItem from="1554096532696" duration="88000" />
       <workItem from="1554096979840" duration="27975000" />
+      <workItem from="1554716934699" duration="157000" />
+      <workItem from="1554717139605" duration="12902000" />
+      <workItem from="1554960258140" duration="75000" />
+      <workItem from="1554960603476" duration="1909000" />
     </task>
     <task id="LOCAL-00001" summary="new version">
       <created>1531393084943</created>
@@ -335,7 +383,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31399000" />
+    <option name="totallyTimeSpent" value="46442000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -347,23 +395,23 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="974" height="1087" extended-state="0" />
+    <frame x="573" y="99" width="650" height="725" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48918918" visible="true" weight="0.16301969" />
-      <window_info id="Structure" order="1" sideWeight="0.5108108" side_tool="true" visible="true" weight="0.16301969" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.47884187" visible="true" weight="0.35016835" />
+      <window_info id="Structure" order="1" sideWeight="0.52115816" side_tool="true" visible="true" weight="0.35016835" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="Designer" order="3" />
       <window_info id="Image Layers" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="UI Designer" order="6" />
-      <window_info anchor="bottom" id="Run" order="0" sideWeight="0.5025344" side_tool="true" visible="true" weight="0.22191012" />
+      <window_info anchor="bottom" id="Run" order="0" sideWeight="0.50323623" side_tool="true" weight="0.24503312" />
       <window_info anchor="bottom" id="Debug" order="1" sideWeight="0.50262624" side_tool="true" weight="0.23355506" />
-      <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.5035587" side_tool="true" weight="0.27695003" />
+      <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.506734" side_tool="true" visible="true" weight="0.2479062" />
       <window_info anchor="bottom" id="Database Changes" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="4" sideWeight="0.49946696" weight="0.32952183" />
       <window_info anchor="bottom" id="Python Console" order="5" sideWeight="0.49732906" weight="0.3280757" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="6" sideWeight="0.4974656" visible="true" weight="0.22431865" />
+      <window_info anchor="bottom" id="Terminal" order="6" sideWeight="0.493266" visible="true" weight="0.2479062" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="8" />
       <window_info anchor="bottom" id="Find" order="9" />
@@ -380,6 +428,8 @@
       <window_info anchor="right" id="Capture Analysis" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info anchor="right" id="Theme Preview" order="9" />
+      <window_info anchor="right" id="R Packages" order="10" />
+      <window_info anchor="right" id="R Graphics" order="11" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -392,6 +442,9 @@
     </ignored-roots>
     <MESSAGE value="new version" />
     <option name="LAST_COMMIT_MESSAGE" value="new version" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Acrophobia_judge_system$Text_to_graph.coverage" NAME="Text_to_graph Coverage Results" MODIFIED="1554787912819" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python-fitbit" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/python-fitbit/automation_module.py">
@@ -415,6 +468,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/python-fitbit/python-fitbit.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LSTM_for_pNN50.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
+          <folding>
+            <element signature="e#54#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/python-fitbit/RNN+Plots-LSTM.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
@@ -430,8 +500,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Test/keras_test.ipynb">
-      <provider selected="true" editor-type-id="jupyter-editor" />
       <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="jupyter-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/python-fitbit/gather_keys_oauth2.py">
       <provider selected="true" editor-type-id="text-editor" />
@@ -442,34 +512,27 @@
     <entry file="file://$PROJECT_DIR$/python-fitbit/2018-07-30.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/LSTM_for_pNN50.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
-          <folding>
-            <element signature="e#54#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/python-fitbit/python-fitbit.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1951">
-          <caret line="16" column="29" lean-forward="true" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/python-fitbit/2018-11-07.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="2475" column="2" lean-forward="true" selection-start-line="2475" selection-start-column="2" selection-end-line="2475" selection-end-column="10" />
+        <state relative-caret-position="121">
+          <caret line="2475" column="2" selection-start-line="2475" selection-start-column="2" selection-end-line="2475" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/python-fitbit/Text_to_graph.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="24" column="55" selection-start-line="24" selection-start-column="55" selection-end-line="24" selection-end-column="55" />
+        <state relative-caret-position="935">
+          <caret line="55" column="19" selection-start-line="55" selection-start-column="19" selection-end-line="55" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python-fitbit/prediction_part.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
+          <folding>
+            <element signature="e#16#25#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
