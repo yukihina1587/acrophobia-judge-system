@@ -45,7 +45,7 @@ def getHeartRate():
     headers = {"Authorization": "Bearer " + ACCESS_TOKEN}
     res = requests.get(url, headers=headers)
     jsonStr = json.loads(res.text)
-    # print(res.status_code)
+    print(res.status_code)
     # 通信が行えていると200が返ってくる
     return res.text
 
@@ -80,7 +80,8 @@ def showTable(res_str):
 
 class OAuth2Server:
     def __init__(self, client_id, client_secret,
-                 redirect_uri='http://127.0.0.1:8080/'):
+                 redirect_uri='http://localhost/'):
+                 #redirect_uri='http://127.0.0.1:8080/'):
         """ Initialize the FitbitOauth2Client """
         self.success_html = """
             <h1>からあげ</h1>
