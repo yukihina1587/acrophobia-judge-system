@@ -80,7 +80,7 @@ def showTable(res_str):
 
 class OAuth2Server:
     def __init__(self, client_id, client_secret,
-                 redirect_uri='http://localhost/'):
+                 redirect_uri='http://127.0.0.1:3000/'):
                  #redirect_uri='http://127.0.0.1:8080/'):
         """ Initialize the FitbitOauth2Client """
         self.success_html = """
