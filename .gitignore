@@ -14,7 +14,8 @@ htmlcov
 
 # Editors
 .idea
-
+.idea/**/workspace.xml
+.idea/**/tasks.xml
 
 $ cat .gitignore
 __pycache__/
