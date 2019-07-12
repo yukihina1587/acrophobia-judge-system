@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d68f947-a147-4cb5-bade-0d463305032d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/python-fitbit/python-fitbit.py" beforeDir="false" afterPath="$PROJECT_DIR$/python-fitbit/python-fitbit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Arduino/Get-EFG.py" beforeDir="false" afterPath="$PROJECT_DIR$/Arduino/Get-EFG.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,7 +29,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/python-fitbit/sin-prediction.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1173">
+            <state relative-caret-position="436">
               <caret line="71" selection-start-line="71" selection-end-line="71" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
@@ -54,7 +53,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/python-fitbit/RNN+Plots-LSTM.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
+            <state relative-caret-position="436">
               <caret line="39" column="75" selection-start-line="39" selection-start-column="75" selection-end-line="39" selection-end-column="75" />
             </state>
           </provider>
@@ -69,7 +68,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MindWaveMobile2/Get-EEG.py">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
@@ -77,8 +76,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Arduino/Get-EFG.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
+            <state relative-caret-position="102">
+              <caret line="6" column="19" lean-forward="true" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
               <folding>
                 <element signature="e#14#27#0" expanded="true" />
               </folding>
@@ -86,11 +85,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/acrophobia_judge_system/manage.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
-              <caret line="7" column="32" lean-forward="true" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
+              <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
               <folding>
                 <element signature="e#84#93#0" expanded="true" />
               </folding>
@@ -101,7 +100,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/acrophobia_judge_system/polls/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
+            <state relative-caret-position="51">
               <caret line="6" column="65" selection-start-line="6" selection-start-column="65" selection-end-line="6" selection-end-column="65" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
@@ -113,7 +112,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/acrophobia_judge_system/polls/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
+            <state relative-caret-position="68">
               <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
@@ -125,8 +124,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/acrophobia_judge_system/acrophobia_judge_system/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="42" lean-forward="true" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
+            <state relative-caret-position="306">
+              <caret line="19" column="42" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
               <folding>
                 <element signature="e#647#679#0" expanded="true" />
               </folding>
@@ -176,20 +175,20 @@
         <option value="$PROJECT_DIR$/python-fitbit/sin-prediction.ipynb" />
         <option value="$PROJECT_DIR$/python-fitbit/sin-prediction.py" />
         <option value="$PROJECT_DIR$/python-fitbit/python-fitbit.py" />
-        <option value="$PROJECT_DIR$/Arduino/Get-EFG.py" />
         <option value="$PROJECT_DIR$/acrophobia_judge_system/acrophobia_judge_system/settings.py" />
         <option value="$PROJECT_DIR$/acrophobia_judge_system/polls/views.py" />
         <option value="$PROJECT_DIR$/acrophobia_judge_system/polls/urls.py" />
         <option value="$PROJECT_DIR$/acrophobia_judge_system/acrophobia_judge_system/urls.py" />
         <option value="$PROJECT_DIR$/acrophobia_judge_system/manage.py" />
+        <option value="$PROJECT_DIR$/Arduino/Get-EFG.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="555" />
-    <option name="y" value="86" />
-    <option name="width" value="1338" />
-    <option name="height" value="919" />
+    <option name="x" value="613" />
+    <option name="y" value="144" />
+    <option name="width" value="1265" />
+    <option name="height" value="889" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -197,7 +196,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -208,19 +206,7 @@
             <path>
               <item name="acrophobia-judge-system" type="b2602c69:ProjectViewProjectNode" />
               <item name="acrophobia-judge-system" type="462c0819:PsiDirectoryNode" />
-              <item name="acrophobia_judge_system" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="acrophobia-judge-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="acrophobia-judge-system" type="462c0819:PsiDirectoryNode" />
-              <item name="acrophobia_judge_system" type="462c0819:PsiDirectoryNode" />
-              <item name="acrophobia_judge_system" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="acrophobia-judge-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="acrophobia-judge-system" type="462c0819:PsiDirectoryNode" />
-              <item name="acrophobia_judge_system" type="462c0819:PsiDirectoryNode" />
-              <item name="polls" type="462c0819:PsiDirectoryNode" />
+              <item name="Arduino" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="acrophobia-judge-system" type="b2602c69:ProjectViewProjectNode" />
@@ -231,6 +217,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -266,7 +253,29 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.sin-prediction">
+  <component name="RunManager" selected="Python.Get-EFG">
+    <configuration name="Get-EFG" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="acrophobia_system" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Arduino" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Arduino/Get-EFG.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Text_to_graph" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="acrophobia_system" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -383,9 +392,11 @@
       <item itemvalue="Python.keras_test" />
       <item itemvalue="Python.python-fitbit" />
       <item itemvalue="Python.sin-prediction" />
+      <item itemvalue="Python.Get-EFG" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Get-EFG" />
         <item itemvalue="Python.sin-prediction" />
         <item itemvalue="Python.Text_to_graph" />
       </list>
@@ -418,6 +429,7 @@
       <workItem from="1559100309347" duration="694000" />
       <workItem from="1559274205387" duration="5837000" />
       <workItem from="1559883954314" duration="7925000" />
+      <workItem from="1562910074761" duration="7334000" />
     </task>
     <task id="LOCAL-00001" summary="new version">
       <created>1531393084943</created>
@@ -451,7 +463,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83286000" />
+    <option name="totallyTimeSpent" value="90620000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -463,22 +475,23 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="555" y="86" width="1338" height="919" extended-state="0" />
+    <frame x="613" y="144" width="1265" height="889" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.46167883" visible="true" weight="0.14319248" />
-      <window_info id="Structure" order="1" sideWeight="0.5383212" side_tool="true" visible="true" weight="0.14319248" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.45945945" visible="true" weight="0.15435685" />
+      <window_info id="Structure" order="1" sideWeight="0.5405405" side_tool="true" visible="true" weight="0.15435685" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="Designer" order="3" />
       <window_info id="Image Layers" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="UI Designer" order="6" />
-      <window_info active="true" anchor="bottom" id="Run" order="0" sideWeight="0.5079957" side_tool="true" visible="true" weight="0.24714434" />
+      <window_info active="true" anchor="bottom" id="Run" order="0" sideWeight="0.5087137" side_tool="true" visible="true" weight="0.3148148" />
       <window_info anchor="bottom" id="Debug" order="1" sideWeight="0.50262624" side_tool="true" weight="0.23355506" />
       <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.5074627" side_tool="true" weight="0.24714434" />
       <window_info anchor="bottom" id="Database Changes" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="4" sideWeight="0.49946696" weight="0.32917964" />
       <window_info anchor="bottom" id="Python Console" order="5" sideWeight="0.49732906" weight="0.3271028" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="6" sideWeight="0.49200428" visible="true" weight="0.302799" />
+      <window_info anchor="bottom" id="Terminal" order="6" sideWeight="0.4912863" visible="true" weight="0.3148148" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="8" />
       <window_info anchor="bottom" id="Find" order="9" />
@@ -512,6 +525,7 @@
     <option name="LAST_COMMIT_MESSAGE" value="new version" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/acrophobia_judge_system$Get_EFG.coverage" NAME="Get-EFG Coverage Results" MODIFIED="1562920279903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Arduino" />
     <SUITE FILE_PATH="coverage/acrophobia_judge_system$sin_prediction.coverage" NAME="sin-prediction Coverage Results" MODIFIED="1555051454234" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python-fitbit" />
     <SUITE FILE_PATH="coverage/Acrophobia_judge_system$Text_to_graph.coverage" NAME="Text_to_graph Coverage Results" MODIFIED="1554787912819" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python-fitbit" />
   </component>
@@ -592,85 +606,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LSTM_for_pNN50.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
-          <folding>
-            <element signature="e#54#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/python-fitbit/RNN+Plots-LSTM.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="39" column="75" selection-start-line="39" selection-start-column="75" selection-end-line="39" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test/keras_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="25" column="34" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MindWaveMobile2/Get-EEG.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Arduino/Get-EFG.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
-          <folding>
-            <element signature="e#14#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/python-fitbit/gather_keys_oauth2.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/acrophobia_judge_system/acrophobia_judge_system/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="42" lean-forward="true" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
-          <folding>
-            <element signature="e#647#679#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/acrophobia_judge_system/polls/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/acrophobia_judge_system/polls/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="65" selection-start-line="6" selection-start-column="65" selection-end-line="6" selection-end-column="65" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/python-fitbit/sin-prediction.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1173">
-          <caret line="71" selection-start-line="71" selection-end-line="71" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/python-fitbit/sin-prediction.ipynb">
       <provider selected="true" editor-type-id="jupyter-editor" />
@@ -688,15 +625,92 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/acrophobia_judge_system/polls/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="6" column="65" selection-start-line="6" selection-start-column="65" selection-end-line="6" selection-end-column="65" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/acrophobia_judge_system/polls/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/acrophobia_judge_system/acrophobia_judge_system/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="19" column="42" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
+          <folding>
+            <element signature="e#647#679#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/acrophobia_judge_system/manage.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="7" column="32" lean-forward="true" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
+          <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
           <folding>
             <element signature="e#84#93#0" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Arduino/Get-EFG.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="19" lean-forward="true" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+          <folding>
+            <element signature="e#14#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python-fitbit/sin-prediction.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LSTM_for_pNN50.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
+          <folding>
+            <element signature="e#54#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python-fitbit/RNN+Plots-LSTM.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="39" column="75" selection-start-line="39" selection-start-column="75" selection-end-line="39" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/keras_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="25" column="34" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MindWaveMobile2/Get-EEG.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
   <component name="masterDetails">
