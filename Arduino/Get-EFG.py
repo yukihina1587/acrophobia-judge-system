@@ -3,9 +3,10 @@ import serial
 import re
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy import signal
 
 def main():
-    with serial.Serial('COM6',115200,timeout=1) as ser:
+    with serial.Serial('COM3',115200,timeout=1) as ser:
         # 初期化
         i = 0
         x = np.zeros(300)
@@ -15,7 +16,6 @@ def main():
         plt.ion()
         plt.figure(figsize=(30, 10), dpi=50)
         li, = plt.plot(x, y)
-        #plt.xlim(1000)
         plt.ylim(400)
         plt.title('EFG Graph', fontsize=18)
         plt.xlabel('ms', fontsize=18)
@@ -35,13 +35,23 @@ def main():
                 y = np.delete(y, 0)
                 #print(y)
 
+                # ピーク値のインデックスを取得
+                maxid = signal.argrelmax(y, order=1)  # 最大値
+                minid = signal.argrelmin(y, order=1)  # 最小値
+
                 li.set_xdata(x)
                 li.set_ydata(y)
+
                 plt.xlim((x.min(), x.max()))
                 plt.ylim([-100, 300])
                 plt.tick_params(labelsize=18)
-                #plt.draw()
+                plt.draw()
                 plt.pause(.01)
+
+                plt.plot(x[maxid], y[maxid], 'ro')
+                plt.plot(x[minid], y[minid], 'bo')
+                #plt.legend()
+                plt.show()
 
             except KeyboardInterrupt:
                 plt.close()
