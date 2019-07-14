@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d68f947-a147-4cb5-bade-0d463305032d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/acrophobia_system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/acrophobia_system.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Arduino/ECG_get/ECG_get.ino" beforeDir="false" afterPath="$PROJECT_DIR$/Arduino/ECG_get/ECG_get.ino" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Arduino/Get-EFG.py" beforeDir="false" afterPath="$PROJECT_DIR$/Arduino/Get-EFG.py" afterDir="false" />
@@ -270,7 +268,7 @@
       <workItem from="1559883954314" duration="7925000" />
       <workItem from="1562910074761" duration="7334000" />
       <workItem from="1562929984659" duration="4000" />
-      <workItem from="1562944205902" duration="10758000" />
+      <workItem from="1562944205902" duration="12865000" />
     </task>
     <task id="LOCAL-00001" summary="new version">
       <created>1531393084943</created>

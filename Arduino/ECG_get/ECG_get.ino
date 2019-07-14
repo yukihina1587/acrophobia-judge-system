@@ -63,8 +63,8 @@ void loop() {
   peak = peak*8/10;    //8割以上に上がったら再取得
   peak_count++;
   j = 0;*/
-  Serial.println(heartValue);
-  //Serial.write(heartValue);
+  //Serial.println(heartValue);
+  Serial.write(heartValue);
   delay(5);
 }
 

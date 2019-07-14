@@ -36,8 +36,8 @@ def main():
                 #print(y)
 
                 # ピーク値のインデックスを取得
-                maxid = signal.argrelmax(y, order=1)  # 最大値
-                minid = signal.argrelmin(y, order=1)  # 最小値
+                maxid = signal.argrelmax(y, order=100)  # 最大値
+                minid = signal.argrelmin(y, order=100)  # 最小値
 
                 li.set_xdata(x)
                 li.set_ydata(y)
