@@ -36,8 +36,10 @@ def main():
                 #print(y)
 
                 # ピーク値のインデックスを取得
+                # orderの値によって検出ピークの数が変わる
+                # 例えば１だと前後各一点と比較してピーク値を算出、２だと前後二点と比較してピーク値を算出する
                 maxid = signal.argrelmax(y, order=100)  # 最大値
-                minid = signal.argrelmin(y, order=100)  # 最小値
+                #minid = signal.argrelmin(y, order=100)  # 最小値
 
                 li.set_xdata(x)
                 li.set_ydata(y)
@@ -49,7 +51,7 @@ def main():
                 plt.pause(.01)
 
                 plt.plot(x[maxid], y[maxid], 'ro')
-                plt.plot(x[minid], y[minid], 'bo')
+                #plt.plot(x[minid], y[minid], 'bo')
                 #plt.legend()
                 plt.show()
 
