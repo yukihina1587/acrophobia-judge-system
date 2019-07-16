@@ -43,15 +43,8 @@ def main():
                 # 例えば１だと前後各一点と比較してピーク値を算出、２だと前後二点と比較してピーク値を算出する
                 maxid = signal.argrelmax(y, order=100)  # 最大値
                 #minid = signal.argrelmin(y, order=100)  # 最小値
-                peak_x = x[maxid]
-                print(peak[-1])
-                pre_peak_x = x[peak[-1]]
 
-                if((peak_x - pre_peak_x) > 100):
-                    peak = np.append(peak, maxid)
-                    peak = np.delete(peak, 0)
-                    print(maxid)
-                    plt.plot(x[maxid], y[maxid], 'ro')
+                plt.plot(x[maxid], y[maxid], 'ro')
 
                 li.set_xdata(x)
                 li.set_ydata(y)
