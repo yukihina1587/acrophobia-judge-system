@@ -11,6 +11,9 @@ def main():
         i = 0
         x = np.zeros(300)
         y = np.zeros(300)
+        peak = np.zeros(300)
+
+        N = 512  # サンプル数
 
         # MATPLOTLIB コンフィグ
         plt.ion()
@@ -21,8 +24,8 @@ def main():
         plt.xlabel('ms', fontsize=18)
         plt.ylabel('EFG', fontsize=18)
 
-        while True:
-            try:
+        try:
+            while True:
                 String_data = ser.read()
                 int_data = int.from_bytes(String_data, 'big')
                 #print(int_data)
@@ -40,6 +43,15 @@ def main():
                 # 例えば１だと前後各一点と比較してピーク値を算出、２だと前後二点と比較してピーク値を算出する
                 maxid = signal.argrelmax(y, order=100)  # 最大値
                 #minid = signal.argrelmin(y, order=100)  # 最小値
+                peak_x = x[maxid]
+                print(peak[-1])
+                pre_peak_x = x[peak[-1]]
+
+                if((peak_x - pre_peak_x) > 100):
+                    peak = np.append(peak, maxid)
+                    peak = np.delete(peak, 0)
+                    print(maxid)
+                    plt.plot(x[maxid], y[maxid], 'ro')
 
                 li.set_xdata(x)
                 li.set_ydata(y)
@@ -50,15 +62,14 @@ def main():
                 plt.draw()
                 plt.pause(.01)
 
-                plt.plot(x[maxid], y[maxid], 'ro')
+
                 #plt.plot(x[minid], y[minid], 'bo')
                 #plt.legend()
                 plt.show()
 
-            except KeyboardInterrupt:
-                plt.close()
-                ser.close()
-                break
+        except KeyboardInterrupt:
+            plt.close()
+            ser.close()
 
         #while True:
             #c = ser.readline()
