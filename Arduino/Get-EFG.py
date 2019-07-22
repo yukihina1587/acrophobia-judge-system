@@ -6,7 +6,7 @@ import numpy as np
 from scipy import signal
 
 def main():
-    with serial.Serial('COM3',115200,timeout=1) as ser:
+    with serial.Serial('COM6',115200,timeout=1) as ser:
         # 初期化
         i = 0
         x = np.zeros(300)
@@ -37,6 +37,9 @@ def main():
                 y = np.append(y, int_data)
                 y = np.delete(y, 0)
                 #print(y)
+
+                # 非線形関数で補間
+                # https://qiita.com/hik0107/items/9bdc236600635a0e61e8
 
                 # ピーク値のインデックスを取得
                 # orderの値によって検出ピークの数が変わる
