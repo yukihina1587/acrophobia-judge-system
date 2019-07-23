@@ -4,6 +4,10 @@ import re
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy import signal
+## 図示のために使うもの
+import seaborn as sns
+##フィッティングに使うもの
+from scipy.optimize import curve_fit
 
 def main():
     with serial.Serial('COM6',115200,timeout=1) as ser:
@@ -40,6 +44,14 @@ def main():
 
                 # 非線形関数で補間
                 # https://qiita.com/hik0107/items/9bdc236600635a0e61e8
+                def nonlinear_fit(x, a, b):
+                    return b * np.exp(x / (a + x))
+
+                param, cov = curve_fit(nonlinear_fit, x, y)
+                array_y_fit = param[0] * x + param[1]
+
+                sns.pointplot(x=x, y=y, join=False)
+                sns.pointplot(x=x, y=np.array(y), markers="")
 
                 # ピーク値のインデックスを取得
                 # orderの値によって検出ピークの数が変わる
@@ -47,7 +59,7 @@ def main():
                 maxid = signal.argrelmax(y, order=100)  # 最大値
                 #minid = signal.argrelmin(y, order=100)  # 最小値
 
-                plt.plot(x[maxid], y[maxid], 'ro')
+                #plt.plot(x[maxid], y[maxid], 'ro')
 
                 li.set_xdata(x)
                 li.set_ydata(y)
