@@ -40,26 +40,18 @@ def main():
                 x = np.delete(x, 0)
                 y = np.append(y, int_data)
                 y = np.delete(y, 0)
-                #print(y)
 
                 # 非線形関数で補間
                 # https://qiita.com/hik0107/items/9bdc236600635a0e61e8
-                def nonlinear_fit(x, a, b):
-                    return b * np.exp(x / (a + x))
-
-                param, cov = curve_fit(nonlinear_fit, x, y)
-                array_y_fit = param[0] * x + param[1]
-
-                sns.pointplot(x=x, y=y, join=False)
-                sns.pointplot(x=x, y=np.array(y), markers="")
 
                 # ピーク値のインデックスを取得
                 # orderの値によって検出ピークの数が変わる
                 # 例えば１だと前後各一点と比較してピーク値を算出、２だと前後二点と比較してピーク値を算出する
                 maxid = signal.argrelmax(y, order=100)  # 最大値
-                #minid = signal.argrelmin(y, order=100)  # 最小値
+                print(maxid)
+                # minid = signal.argrelmin(y, order=100)  # 最小値
 
-                #plt.plot(x[maxid], y[maxid], 'ro')
+                plt.plot(x[maxid], y[maxid], 'ro')
 
                 li.set_xdata(x)
                 li.set_ydata(y)
