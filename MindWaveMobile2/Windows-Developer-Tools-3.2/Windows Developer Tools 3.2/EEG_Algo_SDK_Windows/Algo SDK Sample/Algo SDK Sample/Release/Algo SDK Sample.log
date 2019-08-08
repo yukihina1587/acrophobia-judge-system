@@ -1,0 +1,13 @@
+﻿  stdafx.cpp
+  Algo SDK Sample.cpp
+C:\Users\v18e3\Documents\acrophobia-judge-system\MindWaveMobile2\Windows-Developer-Tools-3.2\Windows Developer Tools 3.2\EEG_Algo_SDK_Windows\Algo SDK Sample\Algo SDK Sample\Algo SDK Sample.cpp(74,1): warning C4005:  'WM_USER': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\winuser.h(2549): message :  'WM_USER' の以前の定義を確認してください
+C:\Users\v18e3\Documents\acrophobia-judge-system\MindWaveMobile2\Windows-Developer-Tools-3.2\Windows Developer Tools 3.2\EEG_Algo_SDK_Windows\Algo SDK Sample\Algo SDK Sample\Algo SDK Sample.cpp(361,13): warning C4244:  '初期化中': 'NS_ALGO_ATT_INDEX' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\v18e3\Documents\acrophobia-judge-system\MindWaveMobile2\Windows-Developer-Tools-3.2\Windows Developer Tools 3.2\EEG_Algo_SDK_Windows\Algo SDK Sample\Algo SDK Sample\Algo SDK Sample.cpp(369,13): warning C4244:  '初期化中': 'NS_ALGO_MED_INDEX' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\v18e3\Documents\acrophobia-judge-system\MindWaveMobile2\Windows-Developer-Tools-3.2\Windows Developer Tools 3.2\EEG_Algo_SDK_Windows\Algo SDK Sample\Algo SDK Sample\Algo SDK Sample.cpp(377,18): warning C4244:  '初期化中': 'NS_ALGO_EYE_BLINK_STRENGTH' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\v18e3\Documents\acrophobia-judge-system\MindWaveMobile2\Windows-Developer-Tools-3.2\Windows Developer Tools 3.2\EEG_Algo_SDK_Windows\Algo SDK Sample\Algo SDK Sample\Algo SDK Sample.cpp(792,14): warning C4101:  'hFile': ローカル変数は 1 度も使われていません。
+  Previous IPDB not found, fall back to full compilation.
+  コード生成しています。
+  All 20 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  コード生成が終了しました。
+  Algo SDK Sample.vcxproj -> C:\Users\v18e3\Documents\acrophobia-judge-system\MindWaveMobile2\Windows-Developer-Tools-3.2\Windows Developer Tools 3.2\EEG_Algo_SDK_Windows\Algo SDK Sample\Release\Algo SDK Sample.exe

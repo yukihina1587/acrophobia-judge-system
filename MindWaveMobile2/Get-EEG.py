@@ -1,8 +1,16 @@
 import thinkgear
 
-PORT = '/dev/tty.MindWaveMobile-SerialPo' /*ここに/dev/tty.~を記述
+PORT = 'COM5'
+
 for packets in thinkgear.ThinkGearProtocol(PORT).get_packets():
-    for p in packets:
-        if isinstance(p, thinkgear.ThinkGearRawWaveData):
+    for pkt in packets:
+        if isinstance(pkt, thinkgear.ThinkGearRawWaveData):
             continue
-        print p
+
+        t = str(pkt)
+
+        if t != '':
+            differencer = t[0:1] # 最初の文字を取り出す
+            if int(differencer) == 1:
+                attention = t[1:]  # 最初の文字以外をattentionとして代入
+                print(attention)
