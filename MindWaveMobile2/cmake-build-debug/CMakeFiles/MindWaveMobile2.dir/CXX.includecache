@@ -1,0 +1,94 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Include/NSK_Algo.h
+NSK_Algo_Defines.h
+../Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Include/NSK_Algo_Defines.h
+
+../Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Include/NSK_Algo_Defines.h
+Platform_Defines.h
+../Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Include/Platform_Defines.h
+NSK_Algo_ReturnCodes.h
+../Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Include/NSK_Algo_ReturnCodes.h
+
+../Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Include/NSK_Algo_Helper.h
+
+../Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Include/NSK_Algo_ReturnCodes.h
+NSK_Algo_Helper.h
+../Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Include/NSK_Algo_Helper.h
+
+../Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Include/Platform_Defines.h
+math.h
+-
+Windows.h
+-
+
+/cygdrive/c/Users/v18e3/Documents/acrophobia-judge-system/MindWaveMobile2/Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Algo SDK Sample/Algo SDK Sample/Algo SDK Sample.cpp
+stdafx.h
+/cygdrive/c/Users/v18e3/Documents/acrophobia-judge-system/MindWaveMobile2/Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Algo SDK Sample/Algo SDK Sample/stdafx.h
+Algo SDK Sample.h
+/cygdrive/c/Users/v18e3/Documents/acrophobia-judge-system/MindWaveMobile2/Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Algo SDK Sample/Algo SDK Sample/Algo SDK Sample.h
+NSK_Algo.h
+/cygdrive/c/Users/v18e3/Documents/acrophobia-judge-system/MindWaveMobile2/Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Algo SDK Sample/Algo SDK Sample/NSK_Algo.h
+thinkgear.h
+/cygdrive/c/Users/v18e3/Documents/acrophobia-judge-system/MindWaveMobile2/Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Algo SDK Sample/Algo SDK Sample/thinkgear.h
+stdio.h
+-
+string
+-
+WinUser.h
+-
+windowsx.h
+-
+Windows.h
+-
+CommCtrl.h
+-
+time.h
+-
+
+/cygdrive/c/Users/v18e3/Documents/acrophobia-judge-system/MindWaveMobile2/Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Algo SDK Sample/Algo SDK Sample/Algo SDK Sample.h
+resource.h
+/cygdrive/c/Users/v18e3/Documents/acrophobia-judge-system/MindWaveMobile2/Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Algo SDK Sample/Algo SDK Sample/resource.h
+
+/cygdrive/c/Users/v18e3/Documents/acrophobia-judge-system/MindWaveMobile2/Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Algo SDK Sample/Algo SDK Sample/Get-EEG-C++.cpp
+stdlib.h
+-
+stdio.h
+-
+time.h
+-
+thinkgear.h
+/cygdrive/c/Users/v18e3/Documents/acrophobia-judge-system/MindWaveMobile2/Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Algo SDK Sample/Algo SDK Sample/thinkgear.h
+
+/cygdrive/c/Users/v18e3/Documents/acrophobia-judge-system/MindWaveMobile2/Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Algo SDK Sample/Algo SDK Sample/resource.h
+
+/cygdrive/c/Users/v18e3/Documents/acrophobia-judge-system/MindWaveMobile2/Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Algo SDK Sample/Algo SDK Sample/stdafx.cpp
+stdafx.h
+/cygdrive/c/Users/v18e3/Documents/acrophobia-judge-system/MindWaveMobile2/Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Algo SDK Sample/Algo SDK Sample/stdafx.h
+
+/cygdrive/c/Users/v18e3/Documents/acrophobia-judge-system/MindWaveMobile2/Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Algo SDK Sample/Algo SDK Sample/stdafx.h
+targetver.h
+/cygdrive/c/Users/v18e3/Documents/acrophobia-judge-system/MindWaveMobile2/Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Algo SDK Sample/Algo SDK Sample/targetver.h
+windows.h
+-
+stdlib.h
+-
+malloc.h
+-
+memory.h
+-
+tchar.h
+-
+
+/cygdrive/c/Users/v18e3/Documents/acrophobia-judge-system/MindWaveMobile2/Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Algo SDK Sample/Algo SDK Sample/targetver.h
+SDKDDKVer.h
+-
+
+/cygdrive/c/Users/v18e3/Documents/acrophobia-judge-system/MindWaveMobile2/Windows-Developer-Tools-3.2/Windows Developer Tools 3.2/EEG_Algo_SDK_Windows/Algo SDK Sample/Algo SDK Sample/thinkgear.h
+

@@ -12,6 +12,7 @@
 #include <Windows.h>
 #include <CommCtrl.h>
 #include <time.h>
+#pragma once
 
 extern "C" {
 	void *myMalloc(size_t size) {

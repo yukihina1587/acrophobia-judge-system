@@ -25,7 +25,7 @@ wait() {
 int
 main( void ) {
 
-    char *comPortName  = NULL;
+    char *comPortName  = COM5;
     int   dllVersion   = 0;
     int   connectionId = 0;
     int   packetsRead  = 0;
