@@ -4,10 +4,25 @@ import re
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy import signal
+## scipyのモジュールを使う
+from scipy.interpolate import Akima1DInterpolator
 ## 図示のために使うもの
 import seaborn as sns
 ##フィッティングに使うもの
 from scipy.optimize import curve_fit
+
+def spline_interp(in_x, in_y):
+    f = Akima1DInterpolator(in_x, in_y)
+    out_x = np.linspace(np.min(in_x), np.max(in_x), np.size(in_x)*100) # もとのxの個数より多いxを用意
+    out_y = f(out_x)
+
+    return out_x, out_y
+
+def moving_avg(in_x, in_y):
+    np_y_conv = np.convolve(in_y, np.ones(3)/float(3), mode='valid') # 畳み込む
+    out_x_dat = np.linspace(np.min(in_x), np.max(in_x), np.size(np_y_conv))
+
+    return out_x_dat, np_y_conv
 
 def main():
     with serial.Serial('COM6',115200,timeout=1) as ser:
@@ -41,15 +56,20 @@ def main():
                 y = np.append(y, int_data)
                 y = np.delete(y, 0)
 
-                # 非線形関数で補間
-                # https://qiita.com/hik0107/items/9bdc236600635a0e61e8
+                # 移動平均で補間
+                # https://www.snova301.work/entry/2018/10/07/135233
+
+                x1, y1 = spline_interp(x, y)
+
+                x2, y2 = moving_avg(x, y)
+                x3, y3 = spline_interp(x2, y2)
 
                 # ピーク値のインデックスを取得
                 # orderの値によって検出ピークの数が変わる
                 # 例えば１だと前後各一点と比較してピーク値を算出、２だと前後二点と比較してピーク値を算出する
-                maxid = signal.argrelmax(y, order=100)  # 最大値
+                maxid = signal.argrelmax(y1, order=100)  # 最大値
                 print(maxid)
-                # minid = signal.argrelmin(y, order=100)  # 最小値
+                ## minid = signal.argrelmin(y, order=100)  # 最小値
 
                 plt.plot(x[maxid], y[maxid], 'ro')
 
