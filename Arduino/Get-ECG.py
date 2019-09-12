@@ -59,19 +59,20 @@ def main():
                 # 移動平均で補間
                 # https://www.snova301.work/entry/2018/10/07/135233
 
-                x1, y1 = spline_interp(x, y)
+                #x1, y1 = spline_interp(x, y)
+                # print[y1]
 
-                x2, y2 = moving_avg(x, y)
-                x3, y3 = spline_interp(x2, y2)
+                #x2, y2 = moving_avg(x, y)
+                #x3, y3 = spline_interp(x2, y2)
 
                 # ピーク値のインデックスを取得
                 # orderの値によって検出ピークの数が変わる
                 # 例えば１だと前後各一点と比較してピーク値を算出、２だと前後二点と比較してピーク値を算出する
-                maxid = signal.argrelmax(y1, order=100)  # 最大値
-                print(maxid)
+                #maxid = signal.argrelmax(y, order=100)  # 最大値
+                #print(maxid)
                 ## minid = signal.argrelmin(y, order=100)  # 最小値
 
-                plt.plot(x[maxid], y[maxid], 'ro')
+                #plt.plot(x[maxid], y[maxid], 'ro')
 
                 li.set_xdata(x)
                 li.set_ydata(y)
