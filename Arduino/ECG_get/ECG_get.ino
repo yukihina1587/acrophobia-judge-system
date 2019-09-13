@@ -1,89 +1,46 @@
-/*!
-* @file HeartRateMonitor.ino
-* @brief HeartRateMonitor.ino  Sampling and ECG output
-*
-*  Real-time sampling and ECG output
-*
-* @author linfeng(490289303@qq.com)
-* @version  V1.0
-* @date  2016-4-5
-*/
-
-#include <TimeLib.h>
-
-#define TIME_MSG_LEN 11 // time sync to PC is HEADER followed by Unix time_t as ten ASCII digits
-#define TIME_HEADER 'T' // Header tag for serial time sync message
-#define TIME_REQUEST 7 // ASCII bell character requests a time sync message 
+#define TIMER_TIME 1000
 
 const int heartPin = A1;
-byte j = 0;    //フラグ管理
-unsigned long tNow, tPrev;
-word peak;
-unsigned long time;
-long RRI;
-int peak_count = 0;    //心拍の拍動間隔(RRI)の個数管理
-long sum = 0.0;    //RRIの和
-long RR_data[50];    //データを50個格納
+int ECG[10] = {0};
+int timer_num = 0;
+//RRIを出すための配列
+int R[2] = {0};
+int RRI = 0;
 
 void setup() {
-  //Serial.println(millis());
-  //Serial.println(now());
   Serial.begin(115200);
 }
 
 void loop() {
+  //心拍を取得
   int heartValue = analogRead(heartPin);
-  
-  //myPrintf("%02d:%02d:%02d", hour(), minute(), second() );
-  /*time = millis();
-  Serial.print(time/1000);
-  Serial.print("    :    ");
-  Serial.println(heartValue*0.005);
+  //タイマーのインクリメントを行う
+  m_status_check_handle();
 
-  //ピーク時更新なら
-  if(heartValue>peak){
-    peak = heartValue;    //保存
-    tNow=millis();    //時間を取得
-    j = 1;    //取得した
+  //取得した最近10個の心拍データを配列に先頭から順に代入
+  for(int i = 0; i < 10; i++){
+    if(i == 9){
+      ECG[i] = heartValue;
+    }else{
+      ECG[i] = ECG[i+1];
+    }
   }
 
-  //7割に落ちたときにピーク確定→集計
-  if(heartValue<peak*7/10 && j == 1){
-    if(peak_count){
-      Serial.print("RR:");
-      RRI = tNow - tPrev;
-      Serial.print(RRI);
-      Serial.println("ms");
-      sum = sum + RRI;
-      calc_SDNN(RRI, sum/peak_count);
-    }
-  }*/
+  //RRI数値を閾値から割り出す
+  if(ECG[10] - ECG[9] > 100){
+    R[0] = R[1];
+    R[1] = timer_num;
+    RRI = R[1] - R[0];
+  }
 
-  /*tPrev = tNow;
-  peak = peak*8/10;    //8割以上に上がったら再取得
-  peak_count++;
-  j = 0;*/
-  //Serial.println(heartValue);
-  Serial.write(heartValue);
+  Serial.write(RRI);
+  //Serial.println(RRI);
   delay(5);
 }
 
-void myPrintf(char *fmt, ...){
-  char buf[128];
-  va_list args;
-  va_start(args, fmt);
-  vsnprintf(buf, 128, fmt, args);
-  va_end(args);
-  Serial.print(buf);
+void m_status_check_handle(void){
+  timer_num++;
 }
-
-void calc_SDNN(long RRI, long ave){
-  long sigma = 0.0;
-  for(int n = 0; n < peak_count; n++){
-    sigma = RRI -  ave;
-  }
-}
-
 /******************************************************************************
   Copyright (C) <2016>  <jianghao>
   This program is free software: you can redistribute it and/or modify
