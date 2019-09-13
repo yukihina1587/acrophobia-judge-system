@@ -42,9 +42,8 @@ def main():
 
         try:
             while True:
-                String_data = ser.read()
-                int_data = int.from_bytes(String_data, 'big')
-                #print(int_data)
+                RRI_data = ser.read()
+                int_data = int.from_bytes(RRI_data, 'big')
                 i = i + 1
 
                 # 配列をキューと見たてて要素を追加・削除
@@ -77,7 +76,7 @@ def main():
                 plt.xlim((x.min(), x.max()))
                 plt.ylim([-100, 300])
                 plt.tick_params(labelsize=18)
-                plt.draw()
+                # plt.draw()
                 plt.pause(.01)
 
 
