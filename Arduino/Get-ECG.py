@@ -62,7 +62,9 @@ def main():
                 if int_data > 10:
                     recent_condition = np.append(recent_condition, int_data)
                     recent_condition = np.delete(recent_condition, 0)
-                    default_RRI = statistics.mode(recent_condition)
+                    ## default_RRI = statistics.mode(recent_condition)
+                    # "statistics.StatisticsError: no unique mode; found 2 equally common values"という最頻値が2つ存在した場合に起こる例外の対策のためcounter()メソッドを使用
+                    default_RRI = collections.Counter(recent_condition).most_common()[0][0]
                     ## recent_conditionもdefault_RRIも型確認を行うとfloat型で出力されている
                     ## print(default_RRI)
                     if default_RRI > int_data:
