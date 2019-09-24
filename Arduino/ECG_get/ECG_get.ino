@@ -6,6 +6,7 @@ int timer_num = 0;
 //RRIを出すための配列
 int R[2] = {0};
 int RRI = 0;
+//R値のmsを格納する配列
 int timer[10] = {0};
 
 void setup() {
@@ -31,13 +32,13 @@ void loop() {
 
   //RRI数値を閾値から割り出す
   if(ECG[9] - ECG[8] > 100){
-    R[0] = timer[];
+    R[0] = timer[9];
     R[1] = timer_num;
     RRI = R[1] - R[0];
   }
 
-  //Serial.write(RRI);
-  Serial.println(heartValue);
+  Serial.write(RRI);
+  //Serial.println(heartValue);
   delay(5);
 }
 
