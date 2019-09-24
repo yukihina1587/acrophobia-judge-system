@@ -26,7 +26,7 @@ void loop() {
       timer[i] = timer_num;
     }else{
       ECG[i] = ECG[i+1];
-      timer[i] = timer[i+1]
+      timer[i] = timer[i+1];
     }
   }
 
@@ -37,8 +37,8 @@ void loop() {
     RRI = R[1] - R[0];
   }
 
-  Serial.write(RRI);
-  //Serial.println(heartValue);
+  //Serial.write(RRI);
+  Serial.println(RRI);
   delay(5);
 }
 
