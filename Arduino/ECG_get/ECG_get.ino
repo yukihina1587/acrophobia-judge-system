@@ -8,6 +8,10 @@ int R[2] = {0};
 int RRI = 0;
 //R値のmsを格納する配列
 int timer[10] = {0};
+//ピーク値を格納
+int peak = 0;
+//ピーク値確定フラグ
+bool R_flag = false;
 
 void setup() {
   Serial.begin(115200);
@@ -24,21 +28,32 @@ void loop() {
     if(i == 9){
       ECG[i] = heartValue;
       timer[i] = timer_num;
+      //RRI数値を閾値から割り出す
+      if(peak < ECG[i] && R_flag == false){
+        peak = ECG[i];
+        R_flag = true;
+        Serial.println(peak);
+      }else if(peak*(7/10) < ECG[i] && R_flag == true){
+        if(R[0] == 0 && R[1] == 0){
+          R[0] = timer[i];
+        }else if(R[1] == 0){
+          R[1] = timer[i];
+        }else{
+          R[0] = R[1];
+          R[1] = timer[i];
+        }
+        R_flag = false;
+      }
     }else{
       ECG[i] = ECG[i+1];
       timer[i] = timer[i+1];
     }
   }
-
-  //RRI数値を閾値から割り出す
-  if(ECG[9] - ECG[8] > 100){
-    R[0] = timer[9];
-    R[1] = timer_num;
-    RRI = R[1] - R[0];
-  }
+  RRI = R[1] - R[0];
 
   //Serial.write(RRI);
-  Serial.println(RRI);
+  //Serial.println(RRI);
+  //Serial.println(heartValue);
   delay(5);
 }
 
