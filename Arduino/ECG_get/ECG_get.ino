@@ -11,7 +11,7 @@ int timer[10] = {0};
 //ピーク値を格納
 int peak = 0;
 //ピーク値確定フラグ
-bool R_flag = false;
+int R_flag = 0;
 
 void setup() {
   Serial.begin(115200);
@@ -29,26 +29,31 @@ void loop() {
       ECG[i] = heartValue;
       timer[i] = timer_num;
       //RRI数値を閾値から割り出す
-      if(peak < ECG[i] && R_flag == false){
+      if(peak <= ECG[i] && R_flag == 0){
         peak = ECG[i];
-        R_flag = true;
-        Serial.println(peak);
-      }else if(peak*(7/10) < ECG[i] && R_flag == true){
-        if(R[0] == 0 && R[1] == 0){
-          R[0] = timer[i];
-        }else if(R[1] == 0){
-          R[1] = timer[i];
-        }else{
-          R[0] = R[1];
-          R[1] = timer[i];
+      }else if(peak > ECG[i]){
+        R_flag++;
+        if(R_flag == 5){
+          Serial.println(peak);
+          Serial.println(ECG[i]);
+          peak = 0;
+          if(R[0] == 0 && R[1] == 0){
+            R[0] = timer[i];
+          }else if(R[1] == 0){
+            R[1] = timer[i];
+          }else{
+            R[0] = R[1];
+            R[1] = timer[i];
+          }
+          R_flag = 0;
         }
-        R_flag = false;
       }
     }else{
       ECG[i] = ECG[i+1];
       timer[i] = timer[i+1];
     }
   }
+  //Serial.println(R[0]);
   RRI = R[1] - R[0];
 
   //Serial.write(RRI);
