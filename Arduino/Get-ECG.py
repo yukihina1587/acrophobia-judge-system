@@ -10,10 +10,6 @@ from scipy.interpolate import Akima1DInterpolator
 import seaborn as sns
 ##フィッティングに使うもの
 from scipy.optimize import curve_fit
-## 最頻値を求めるためのライブラリ
-import statistics
-## 最頻値を求める際に最初は配列には0しか存在しないため、2つ以上の最頻値を返してくる。その例外を回避するライブラリ
-import collections
 
 status = False
 
@@ -36,7 +32,6 @@ def main():
         i = 0
         x = np.zeros(300)
         y = np.zeros(300)
-        recent_condition = np.zeros(11)
 
         # MATPLOTLIB コンフィグ
         plt.ion()
@@ -59,23 +54,15 @@ def main():
                 y = np.append(y, int_data)
                 y = np.delete(y, 0)
 
-                if int_data > 10:
-                    recent_condition = np.append(recent_condition, int_data)
-                    recent_condition = np.delete(recent_condition, 0)
-                    ## default_RRI = statistics.mode(recent_condition)
-                    # "statistics.StatisticsError: no unique mode; found 2 equally common values"という最頻値が2つ存在した場合に起こる例外の対策のためcounter()メソッドを使用
-                    default_RRI = collections.Counter(recent_condition).most_common()[0][0]
-                    ## recent_conditionもdefault_RRIも型確認を行うとfloat型で出力されている
-                    ## print(default_RRI)
-                    if default_RRI > int_data:
-                        status = True
-                        print("緊張状態")
+                # RRIの平均・分散を計算
+                s = sum(y)
+                N = len(y)
+                ave_RRI = s / N
+                print(ave_RRI)
 
-                ## pythonのforループの以下のような構文ではiにはrecent_conditionの実際の値が格納されていく（index値ではない）
-                #for i in recent_condition:
-                    #if i < default_RRI:
-                    #    status = True
-                    #    print("緊張状態")
+                if (ave_RRI - int_data) > 20:
+                    status = True
+                    print("恐怖状態")
 
                 # 移動平均で補間
                 # https://www.snova301.work/entry/2018/10/07/135233
