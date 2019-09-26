@@ -8,10 +8,10 @@ from scipy import signal
 from scipy.interpolate import Akima1DInterpolator
 ## 図示のために使うもの
 import seaborn as sns
-##フィッティングに使うもの
+## フィッティングに使うもの
 from scipy.optimize import curve_fit
-
-status = False
+## 平方根の計算
+import math
 
 def spline_interp(in_x, in_y):
     f = Akima1DInterpolator(in_x, in_y)
@@ -31,16 +31,18 @@ def main():
         # 初期化
         i = 0
         x = np.zeros(300)
-        y = np.zeros(300)
+        y = np.zeros(50)
+        status = False
+        sampling_data_set = 50
 
         # MATPLOTLIB コンフィグ
-        plt.ion()
-        plt.figure(figsize=(30, 10), dpi=50)
-        li, = plt.plot(x, y)
-        plt.ylim(400)
-        plt.title('ECG Graph', fontsize=18)
-        plt.xlabel('ms', fontsize=18)
-        plt.ylabel('ECG', fontsize=18)
+        #plt.ion()
+        #plt.figure(figsize=(30, 10), dpi=50)
+        #li, = plt.plot(x, y)
+        #plt.ylim(400)
+        #plt.title('ECG Graph', fontsize=18)
+        #plt.xlabel('ms', fontsize=18)
+        #plt.ylabel('ECG', fontsize=18)
 
         try:
             while True:
@@ -54,59 +56,48 @@ def main():
                 y = np.append(y, int_data)
                 y = np.delete(y, 0)
 
-                # RRIの平均・分散を計算
-                s = sum(y)
-                N = len(y)
-                ave_RRI = s / N
-                print(ave_RRI)
+                if i > 50:
+                    SDNN_sigma = 0
+                    rMSSD_sigma = 0
+                    SDNN = 0
+                    rMSSD = 0
 
-                if (ave_RRI - int_data) > 20:
-                    status = True
-                    print("恐怖状態")
+                    # RRIの平均・分散を計算
+                    s = sum(y)
+                    N = len(y)
+                    ave_RRI = s / N
 
-                # 移動平均で補間
-                # https://www.snova301.work/entry/2018/10/07/135233
+                    for index in range(sampling_data_set):
+                        SDNN_sigma += (y[index] - ave_RRI) ** 2
 
-                # x1, y1 = spline_interp(x, y)
-                # print[y1]
+                    for index in range(sampling_data_set-1):
+                        rMSSD_sigma += (y[index] - y[index+1]) ** 2
 
-                # x2, y2 = moving_avg(x, y)
-                # x3, y3 = spline_interp(x2, y2)
+                    SDNN = math.sqrt(SDNN_sigma / 50)
+                    rMSSD = math.sqrt(rMSSD / (50-1))
 
-                # ピーク値のインデックスを取得
-                # orderの値によって検出ピークの数が変わる
-                # 例えば１だと前後各一点と比較してピーク値を算出、２だと前後二点と比較してピーク値を算出する
-                #maxid = signal.argrelmax(y, order=100)  # 最大値
-                #print(maxid)
-                # minid = signal.argrelmin(y, order=100)  # 最小値
+                    print('SDNN',SDNN)
+                    #print('rMSSD',rMSSD)
 
-                #plt.plot(x[maxid], y[maxid], 'ro')
+                    if (ave_RRI - int_data) > 20:
+                        status = True
+                        print("恐怖状態")
+                else:
+                    print(i)
 
-                li.set_xdata(x)
-                li.set_ydata(y)
+                #li.set_xdata(x)
+                #li.set_ydata(y)
 
-                plt.xlim((x.min(), x.max()))
-                plt.ylim([-100, 300])
-                plt.tick_params(labelsize=18)
-                # plt.draw()
-                plt.pause(.01)
+                #plt.xlim((x.min(), x.max()))
+                #plt.ylim([-100, 300])
+                #plt.tick_params(labelsize=18)
+                #plt.pause(.01)
 
-
-                #plt.plot(x[minid], y[minid], 'bo')
-                #plt.legend()
-                plt.show()
+                #plt.show()
 
         except KeyboardInterrupt:
             plt.close()
             ser.close()
-
-        #while True:
-            #c = ser.readline()
-            #d = re.findall('[0-9]+\.+[0-9]',str(c),flags=0)
-            #d = [float(i) for i in d]
-            #for i in range(0, len(d)):  #要素を1つずつ順番に出力します
-                #print(d[i])
-            #print
 
 if __name__=="__main__":
     main()
