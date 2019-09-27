@@ -1,7 +1,5 @@
-#coding utf-8
+# -*- coding: utf-8 -*-
 import serial
-import re
-import matplotlib.pyplot as plt
 import numpy as np
 from scipy import signal
 ## scipyのモジュールを使う
@@ -12,37 +10,27 @@ import seaborn as sns
 from scipy.optimize import curve_fit
 ## 平方根の計算
 import math
-
-def spline_interp(in_x, in_y):
-    f = Akima1DInterpolator(in_x, in_y)
-    out_x = np.linspace(np.min(in_x), np.max(in_x), np.size(in_x)*100) # もとのxの個数より多いxを用意
-    out_y = f(out_x)
-
-    return out_x, out_y
-
-def moving_avg(in_x, in_y):
-    np_y_conv = np.convolve(in_y, np.ones(3)/float(3), mode='valid') # 畳み込む
-    out_x_dat = np.linspace(np.min(in_x), np.max(in_x), np.size(np_y_conv))
-
-    return out_x_dat, np_y_conv
+# グラフの描画
+import matplotlib.pyplot as plt
 
 def main():
     with serial.Serial('COM6',115200,timeout=1) as ser:
         # 初期化
         i = 0
-        x = np.zeros(300)
+        x = np.zeros(50)
         y = np.zeros(50)
+        rMSSD_array = np.zeros(50)
         status = False
         sampling_data_set = 50
 
         # MATPLOTLIB コンフィグ
-        #plt.ion()
-        #plt.figure(figsize=(30, 10), dpi=50)
-        #li, = plt.plot(x, y)
-        #plt.ylim(400)
-        #plt.title('ECG Graph', fontsize=18)
-        #plt.xlabel('ms', fontsize=18)
-        #plt.ylabel('ECG', fontsize=18)
+        plt.ion()
+        plt.figure(figsize=(30, 10), dpi=50)
+        li, = plt.plot(x, y)
+        plt.ylim(400)
+        plt.title('ECG Graph', fontsize=18)
+        plt.xlabel('ms', fontsize=18)
+        plt.ylabel('ECG', fontsize=18)
 
         try:
             while True:
@@ -74,26 +62,30 @@ def main():
                         rMSSD_sigma += (y[index] - y[index+1]) ** 2
 
                     SDNN = math.sqrt(SDNN_sigma / 50)
-                    rMSSD = math.sqrt(rMSSD / (50-1))
+                    rMSSD = math.sqrt(rMSSD_sigma / (50-1))
 
-                    print('SDNN',SDNN)
-                    #print('rMSSD',rMSSD)
+                    rMSSD_array = np.append(rMSSD_array, rMSSD)
+                    rMSSD_array = np.delete(rMSSD_array, 0)
+                    #print(rMSSD_array)
 
                     if (ave_RRI - int_data) > 20:
                         status = True
-                        print("恐怖状態")
+                        #print('恐怖状態')
+                elif i < 40:
+                    print('しばらくお待ち下さい')
+                elif 40 <= i and i < 45:
+                    print('残り数ステップです')
                 else:
-                    print(i)
+                    print('残り', (51 - i),'ステップです')
 
-                #li.set_xdata(x)
-                #li.set_ydata(y)
+                li.set_xdata(x)
+                li.set_ydata(y)
+                plt.xlim((x.min(), x.max()))
+                plt.ylim([-100, 300])
+                plt.tick_params(labelsize=18)
+                plt.pause(.01)
 
-                #plt.xlim((x.min(), x.max()))
-                #plt.ylim([-100, 300])
-                #plt.tick_params(labelsize=18)
-                #plt.pause(.01)
-
-                #plt.show()
+                plt.show()
 
         except KeyboardInterrupt:
             plt.close()
