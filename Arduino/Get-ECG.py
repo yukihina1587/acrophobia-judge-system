@@ -12,25 +12,52 @@ from scipy.optimize import curve_fit
 import math
 # グラフの描画
 import matplotlib.pyplot as plt
+import pyqtgraph as pg
+from pyqtgraph.Qt import QtGui, QtCore
 
-def main():
+class GraphWindow():
+    # pyqugraph コンフィグ
+    # Application
+    app = QtGui.QApplication([])
+    app.quitOnLastWindowClosed()
+    # Window
+    mainWindow = QtGui.QMainWindow()
+    mainWindow.setWindowTitle("RRI_Analyzer")
+    # Layout
+    mainWindow.resize(800, 300)
+    centralWid = QtGui.QWidget()
+    mainWindow.setCentralWidget(centralWid)
+    lay = QtGui.QVBoxLayout()
+    centralWid.setLayout(lay)
+    # Data Setting in the Figure
+    RRIWid = pg.PlotWidget(name="RRI")
+    RRIItem = RRIWid.getPlotItem()
+    mainWindow.plotitem.setMouseEnabled(y=False)
+    RRIItem.setYRange(0, 500)
+    RRIItem.setXRange(0, 1000)
+    # Axis
+    RRIAxis = RRIItem.getAxis("bottom")
+    RRIAxis.setLabel("rMSSD_data")
+    #RRIAxis.setScale(fs / 2. / (fftLen / 2 + 1))
+    #hz_interval = 500
+    #newXAxis = (arange(int(fs / 2 / hz_interval)) + 1) * hz_interval
+    #oriXAxis = newXAxis / (fs / 2. / (fftLen / 2 + 1))
+    #RRIAxis.setTicks([zip(oriXAxis, newXAxis)])
+    # キャンパスにのせる
+    lay.addWidget(RRIWid)
+    # ウィンドウ表示
+    mainWindow.show()
+
+class RRI_Analyzer():
     with serial.Serial('COM6',115200,timeout=1) as ser:
         # 初期化
+        # 変数宣言
         i = 0
         x = np.zeros(50)
         y = np.zeros(50)
         rMSSD_array = np.zeros(50)
         status = False
         sampling_data_set = 50
-
-        # MATPLOTLIB コンフィグ
-        plt.ion()
-        plt.figure(figsize=(30, 10), dpi=50)
-        li, = plt.plot(x, y)
-        plt.ylim(400)
-        plt.title('ECG Graph', fontsize=18)
-        plt.xlabel('ms', fontsize=18)
-        plt.ylabel('ECG', fontsize=18)
 
         try:
             while True:
@@ -67,10 +94,9 @@ def main():
                     rMSSD_array = np.append(rMSSD_array, rMSSD)
                     rMSSD_array = np.delete(rMSSD_array, 0)
                     #print(rMSSD_array)
-
-                    if (ave_RRI - int_data) > 20:
-                        status = True
-                        #print('恐怖状態')
+                    mainWin = GraphWindow()
+                    mainWin.show()
+                    sys.exit(app.exec_())
                 elif i < 40:
                     print('しばらくお待ち下さい')
                 elif 40 <= i and i < 45:
@@ -78,18 +104,8 @@ def main():
                 else:
                     print('残り', (51 - i),'ステップです')
 
-                li.set_xdata(x)
-                li.set_ydata(y)
-                plt.xlim((x.min(), x.max()))
-                plt.ylim([-100, 300])
-                plt.tick_params(labelsize=18)
-                plt.pause(.01)
-
-                plt.show()
-
         except KeyboardInterrupt:
-            plt.close()
             ser.close()
 
 if __name__=="__main__":
-    main()
+    RRI_Analyzer()
