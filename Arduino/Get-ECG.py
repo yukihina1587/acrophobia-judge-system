@@ -12,8 +12,7 @@ from scipy.optimize import curve_fit
 import math
 # グラフの描画
 import matplotlib.pyplot as plt
-
-import struct
+from statistics import mean
 
 def main():
     with serial.Serial('COM6', 115200, timeout=0) as ser:
@@ -29,9 +28,9 @@ def main():
         # MATPLOTLIB コンフィグ
         plt.ion()
         plt.figure(figsize=(30, 10), dpi=50)
-        li, = plt.plot(x, y)
+        li, ax = plt.subplots(x, rmssd_array, s=30, c="yellow")
         plt.title('ECG Graph', fontsize=18)
-        plt.xlabel('ms', fontsize=18)
+        plt.xlabel('EEG', fontsize=18)
         plt.ylabel('rMSSD', fontsize=18)
 
         while True:
@@ -72,26 +71,22 @@ def main():
                         rmssd_array = np.append(rmssd_array, rmssd)
                         rmssd_array = np.delete(rmssd_array, 0)
 
-                        if (ave_rri - int_data) > 20:
-                            status = True
-                            #print('恐怖状態')
-
-                        #print(rmssd_array)
-                        li.set_ydata(rmssd_array)
+                        #原点を計算
+                        origin = mean(rmssd_array)\
+                        #plt.set_ydata(rmssd_array)
+                        #plt.set_xdata(0)
+                        plt.xlim(-50, 50)
+                        plt.ylim([origin-60, origin+60])
+                        #plt.ylim([-50, 100])
+                        plt.tick_params(labelsize=18)
+                        plt.pause(.01)
+                        plt.show()
                     elif i == 0:
                         print('しばらくお待ち下さい')
                     elif i == 40:
                         print('残り数ステップです')
                     elif (45 < i) and (i <= 50):
                         print('残り', (51 - i), 'ステップです')
-
-                    li.set_xdata(x)
-                    plt.xlim((x.min(), x.max()))
-                    plt.ylim([-50, 100])
-                    plt.tick_params(labelsize=18)
-                    plt.pause(.01)
-
-                    plt.show()
 
             except KeyboardInterrupt:
                 plt.close()
