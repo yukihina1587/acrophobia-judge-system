@@ -46,14 +46,15 @@ void loop() {
             R[0] = R[1];
             R[1] = timer[i];
             RRI = R[1] - R[0];
-            //Serial.println(RRI);
-            Serial.write(RRI);
+            //Serial.write("H");    //ヘッダの送信
+            //Serial.write(lowByte(RRI));    //下位バイトの送信
+            //Serial.write(highByte(RRI));    //上位バイトの送信
+            Serial.print(RRI, DEC);
           }
           R_flag = 0;
         }
       }else if(peak*(7/10) > ECG[i]){
         R_flag++;
-        
       }
     }else{
       ECG[i] = ECG[i+1];

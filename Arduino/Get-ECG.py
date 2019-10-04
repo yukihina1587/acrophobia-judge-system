@@ -13,83 +13,89 @@ import math
 # グラフの描画
 import matplotlib.pyplot as plt
 
+import struct
+
 def main():
-    with serial.Serial('COM6',115200,timeout=1) as ser:
+    with serial.Serial('COM6', 115200, timeout=0) as ser:
         # 初期化
         i = 0
         x = np.zeros(50)
         y = np.zeros(50)
-        rMSSD_array = np.zeros(50)
+        rmssd_array = np.zeros(50)
         status = False
         sampling_data_set = 50
+        int_data = 0
 
         # MATPLOTLIB コンフィグ
         plt.ion()
         plt.figure(figsize=(30, 10), dpi=50)
         li, = plt.plot(x, y)
-        plt.ylim(400)
         plt.title('ECG Graph', fontsize=18)
         plt.xlabel('ms', fontsize=18)
-        plt.ylabel('ECG', fontsize=18)
+        plt.ylabel('rMSSD', fontsize=18)
 
-        try:
-            while True:
-                RRI_data = ser.read()
-                int_data = int.from_bytes(RRI_data, 'big')
-                i = i + 1
+        while True:
+            try:
+                rri_data = ser.read_all()
+                rri_data_str = rri_data.decode('utf-8')
 
-                # 配列をキューと見たてて要素を追加・削除
-                x = np.append(x, i)
-                x = np.delete(x, 0)
-                y = np.append(y, int_data)
-                y = np.delete(y, 0)
+                if rri_data_str != '':
+                    int_data = int(rri_data_str)
+                    i = i + 1
 
-                if i > 50:
-                    SDNN_sigma = 0
-                    rMSSD_sigma = 0
-                    SDNN = 0
-                    rMSSD = 0
+                    # 配列をキューと見たてて要素を追加・削除
+                    x = np.append(x, i)
+                    x = np.delete(x, 0)
+                    y = np.append(y, int_data)
+                    y = np.delete(y, 0)
 
-                    # RRIの平均・分散を計算
-                    s = sum(y)
-                    N = len(y)
-                    ave_RRI = s / N
+                    if i > 50:
+                        sdnn_sigma = 0
+                        rmssd_sigma = 0
+                        sdnn = 0
+                        rmssd = 0
 
-                    for index in range(sampling_data_set):
-                        SDNN_sigma += (y[index] - ave_RRI) ** 2
+                        # RRIの平均・分散を計算
+                        s = sum(y)
+                        N = len(y)
+                        ave_rri = s / N
 
-                    for index in range(sampling_data_set-1):
-                        rMSSD_sigma += (y[index] - y[index+1]) ** 2
+                        for index in range(sampling_data_set):
+                            sdnn_sigma += (y[index] - ave_rri) ** 2
 
-                    SDNN = math.sqrt(SDNN_sigma / 50)
-                    rMSSD = math.sqrt(rMSSD_sigma / (50-1))
+                        for index in range(sampling_data_set-1):
+                            rmssd_sigma += (y[index] - y[index+1]) ** 2
 
-                    rMSSD_array = np.append(rMSSD_array, rMSSD)
-                    rMSSD_array = np.delete(rMSSD_array, 0)
-                    #print(rMSSD_array)
+                        sdnn = math.sqrt(sdnn_sigma / 50)
+                        rmssd = math.sqrt(rmssd_sigma / (50-1))
 
-                    if (ave_RRI - int_data) > 20:
-                        status = True
-                        #print('恐怖状態')
-                elif i < 40:
-                    print('しばらくお待ち下さい')
-                elif 40 <= i and i < 45:
-                    print('残り数ステップです')
-                else:
-                    print('残り', (51 - i),'ステップです')
+                        rmssd_array = np.append(rmssd_array, rmssd)
+                        rmssd_array = np.delete(rmssd_array, 0)
 
-                li.set_xdata(x)
-                li.set_ydata(y)
-                plt.xlim((x.min(), x.max()))
-                plt.ylim([-100, 300])
-                plt.tick_params(labelsize=18)
-                plt.pause(.01)
+                        if (ave_rri - int_data) > 20:
+                            status = True
+                            #print('恐怖状態')
 
-                plt.show()
+                        #print(rmssd_array)
+                        li.set_ydata(rmssd_array)
+                    elif i == 0:
+                        print('しばらくお待ち下さい')
+                    elif i == 40:
+                        print('残り数ステップです')
+                    elif (45 < i) and (i <= 50):
+                        print('残り', (51 - i), 'ステップです')
 
-        except KeyboardInterrupt:
-            plt.close()
-            ser.close()
+                    li.set_xdata(x)
+                    plt.xlim((x.min(), x.max()))
+                    plt.ylim([-50, 100])
+                    plt.tick_params(labelsize=18)
+                    plt.pause(.01)
+
+                    plt.show()
+
+            except KeyboardInterrupt:
+                plt.close()
+                ser.close()
 
 if __name__=="__main__":
     main()
