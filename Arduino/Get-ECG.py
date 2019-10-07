@@ -71,6 +71,7 @@ def main():
                         rmssd_array = np.append(rmssd_array, rmssd)
                         rmssd_array = np.delete(rmssd_array, 0)
 
+<<<<<<< HEAD
                         #原点を計算
                         origin = mean(rmssd_array)\
                         #plt.set_ydata(rmssd_array)
@@ -78,6 +79,13 @@ def main():
                         plt.xlim(-50, 50)
                         plt.ylim([origin-60, origin+60])
                         #plt.ylim([-50, 100])
+=======
+                        #print(rmssd_array)
+                        li.set_ydata(rmssd_array)
+                        li.set_xdata(x)
+                        plt.xlim((x.min(), x.max()))
+                        plt.ylim([-50, 100])
+>>>>>>> origin/working
                         plt.tick_params(labelsize=18)
                         plt.pause(.01)
                         plt.show()
