@@ -13,6 +13,7 @@ import math
 # グラフの描画
 import matplotlib.pyplot as plt
 from statistics import mean
+import pylab
 
 def main():
     with serial.Serial('COM6', 115200, timeout=0) as ser:
@@ -21,17 +22,18 @@ def main():
         x = np.zeros(50)
         y = np.zeros(50)
         rmssd_array = np.zeros(50)
+        eeg_array = np.zeros(50)
         status = False
         sampling_data_set = 50
         int_data = 0
 
-        # MATPLOTLIB コンフィグ
-        plt.ion()
-        plt.figure(figsize=(30, 10), dpi=50)
-        li, ax = plt.subplots(x, rmssd_array, s=30, c="yellow")
-        plt.title('ECG Graph', fontsize=18)
-        plt.xlabel('EEG', fontsize=18)
-        plt.ylabel('rMSSD', fontsize=18)
+        # 数直線
+        fig, ax = plt.subplots(figsize=(10,10))  # 画像サイズ
+        fig.set_figheight(1)  # 高さ調整
+        ax.tick_params(labelbottom=True, bottom=False)  # x軸設定
+        ax.tick_params(labelleft=True, left=False)  # y軸設定
+
+        # 数直線上の数値を表示
 
         while True:
             try:
@@ -71,25 +73,23 @@ def main():
                         rmssd_array = np.append(rmssd_array, rmssd)
                         rmssd_array = np.delete(rmssd_array, 0)
 
-<<<<<<< HEAD
                         #原点を計算
-                        origin = mean(rmssd_array)\
-                        #plt.set_ydata(rmssd_array)
-                        #plt.set_xdata(0)
-                        plt.xlim(-50, 50)
-                        plt.ylim([origin-60, origin+60])
-                        #plt.ylim([-50, 100])
-=======
-                        #print(rmssd_array)
-                        li.set_ydata(rmssd_array)
-                        li.set_xdata(x)
-                        plt.xlim((x.min(), x.max()))
-                        plt.ylim([-50, 100])
->>>>>>> origin/working
-                        plt.tick_params(labelsize=18)
-                        plt.pause(.01)
-                        plt.show()
-                    elif i == 0:
+                        origin = mean(rmssd_array)
+
+                        xmin, xmax = 0, 100  # 数直線の最小値・最大値
+                        #plt.tight_layout()  # グラフの自動調整
+                        plt.scatter(rmssd_array, eeg_array, s=10, c='r')  # 散布図
+                        plt.hlines(y=0, xmin=xmin, xmax=xmax)  # 横軸
+                        plt.vlines(x=[i for i in range(xmin, xmax + 1, 1)], ymin=-0.04, ymax=0.04)  # 目盛り線（大）
+                        plt.vlines(x=[i / 10 for i in range(xmin * 10, xmax * 10 + 1, 1)], ymin=-0.02,
+                                   ymax=0.02)  # 目盛り線（小）
+                        line_width = 10  # 目盛り数値の刻み幅
+                        plt.xticks(np.arange(xmin, xmax + line_width, line_width))  # 目盛り数値
+                        pylab.box(False)  # 枠を消す
+                        plt.pause(.05)
+
+
+                    elif i == 5:
                         print('しばらくお待ち下さい')
                     elif i == 40:
                         print('残り数ステップです')
