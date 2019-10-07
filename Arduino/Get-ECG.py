@@ -72,26 +72,20 @@ def main():
                         rmssd_array = np.append(rmssd_array, rmssd)
                         rmssd_array = np.delete(rmssd_array, 0)
 
-                        if (ave_rri - int_data) > 20:
-                            status = True
-                            #print('恐怖状態')
-
                         #print(rmssd_array)
                         li.set_ydata(rmssd_array)
+                        li.set_xdata(x)
+                        plt.xlim((x.min(), x.max()))
+                        plt.ylim([-50, 100])
+                        plt.tick_params(labelsize=18)
+                        plt.pause(.01)
+                        plt.show()
                     elif i == 0:
                         print('しばらくお待ち下さい')
                     elif i == 40:
                         print('残り数ステップです')
                     elif (45 < i) and (i <= 50):
                         print('残り', (51 - i), 'ステップです')
-
-                    li.set_xdata(x)
-                    plt.xlim((x.min(), x.max()))
-                    plt.ylim([-50, 100])
-                    plt.tick_params(labelsize=18)
-                    plt.pause(.01)
-
-                    plt.show()
 
             except KeyboardInterrupt:
                 plt.close()
