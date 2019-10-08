@@ -21,6 +21,7 @@ def main():
         i = 0
         x = np.zeros(50)
         y = np.zeros(50)
+        sdnn_array = np.zeros(50)
         rmssd_array = np.zeros(50)
         eeg_array = np.zeros(50)
         status = False
@@ -44,11 +45,12 @@ def main():
                     int_data = int(rri_data_str)
                     i = i + 1
 
-                    # 配列をキューと見たてて要素を追加・削除
-                    x = np.append(x, i)
-                    x = np.delete(x, 0)
-                    y = np.append(y, int_data)
-                    y = np.delete(y, 0)
+                    if (50 < int_data) and (int_data < 300):
+                        # 配列をキューと見たてて要素を追加・削除
+                        x = np.append(x, i)
+                        x = np.delete(x, 0)
+                        y = np.append(y, int_data)
+                        y = np.delete(y, 0)
 
                     if i > 50:
                         sdnn_sigma = 0
@@ -70,24 +72,36 @@ def main():
                         sdnn = math.sqrt(sdnn_sigma / 50)
                         rmssd = math.sqrt(rmssd_sigma / (50-1))
 
+                        sdnn_array = np.append(sdnn_array, sdnn)
+                        sdnn_array = np.delete(sdnn_array, 0)
+
                         rmssd_array = np.append(rmssd_array, rmssd)
                         rmssd_array = np.delete(rmssd_array, 0)
 
                         #原点を計算
                         origin = mean(rmssd_array)
 
-                        xmin, xmax = 0, 100  # 数直線の最小値・最大値
-                        #plt.tight_layout()  # グラフの自動調整
-                        plt.scatter(rmssd_array, eeg_array, s=10, c='r')  # 散布図
-                        plt.hlines(y=0, xmin=xmin, xmax=xmax)  # 横軸
-                        plt.vlines(x=[i for i in range(xmin, xmax + 1, 1)], ymin=-0.04, ymax=0.04)  # 目盛り線（大）
-                        plt.vlines(x=[i / 10 for i in range(xmin * 10, xmax * 10 + 1, 1)], ymin=-0.02,
-                                   ymax=0.02)  # 目盛り線（小）
+                        xmin = 0  # 数直線の最小値
+                        xmax = max(rmssd_array)  # 数直線の最大値
+                        plt.tight_layout()  # グラフの自動調整
+                        plt.scatter(sdnn_array, eeg_array, s=10, c='r')  # 散布図
+                        #plt.hlines(y=0, xmin=xmin, xmax=xmax)  # 横軸
+                        #plt.vlines(x=[i for i in range(xmin, xmax + 1, 1)], ymin=-0.04, ymax=0.04)  # 目盛り線（大）
+                        #plt.vlines(x=[i / 10 for i in range(xmin * 10, xmax * 10 + 1, 1)], ymin=-0.02,
+                        #           ymax=0.02)  # 目盛り線（小）
                         line_width = 10  # 目盛り数値の刻み幅
                         plt.xticks(np.arange(xmin, xmax + line_width, line_width))  # 目盛り数値
                         pylab.box(False)  # 枠を消す
-                        plt.pause(.05)
+                        plt.pause(.01)
 
+                        if rmssd < 150:
+                            print('y:',y)
+                            print('s:',s)
+                            print('N:',N)
+                            print('ave:',ave_rri)
+                            print('rmssd_sigma:',rmssd_sigma)
+                            print('rmssd:',rmssd)
+                            print('-------------')
 
                     elif i == 5:
                         print('しばらくお待ち下さい')
@@ -98,6 +112,7 @@ def main():
 
             except KeyboardInterrupt:
                 plt.close()
+                pylab.close()
                 ser.close()
 
 if __name__=="__main__":
