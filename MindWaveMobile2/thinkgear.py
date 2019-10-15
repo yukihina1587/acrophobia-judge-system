@@ -213,14 +213,14 @@ class ThinkGearPoorSignalData(ThinkGearData):
 class ThinkGearAttentionData(ThinkGearData):
     '''ATTENTION eSense (0 to 100)'''
     code = 0x04
-    _strfmt = 'ATTENTION eSense: 1%(value)s'
+    _strfmt = 'ATTENTION eSense: %(value)s'
     _decode = staticmethod(ord)
 
 
 class ThinkGearMeditationData(ThinkGearData):
     '''MEDITATION eSense (0 to 100)'''
     code = 0x05
-    _strfmt = 'MEDITATION eSense: 2%(value)s'
+    _strfmt = 'MEDITATION eSense: %(value)s'
     _decode = staticmethod(ord)
 
 
