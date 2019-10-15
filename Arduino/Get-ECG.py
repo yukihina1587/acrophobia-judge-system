@@ -21,8 +21,7 @@ def main():
         i = 0
         x = np.zeros(50)
         y = np.zeros(50)
-        sdnn_array = np.zeros(50)
-        rmssd_array = np.zeros(50)
+        ratio_array = np.zeros(50)
         eeg_array = np.zeros(50)
         status = False
         sampling_data_set = 50
@@ -32,7 +31,7 @@ def main():
         fig, ax = plt.subplots(figsize=(10,10))  # 画像サイズ
         fig.set_figheight(1)  # 高さ調整
         ax.tick_params(labelbottom=True, bottom=False)  # x軸設定
-        ax.tick_params(labelleft=True, left=False)  # y軸設定
+        ax.tick_params(labelleft=False, left=False)  # y軸設定
 
         # 数直線上の数値を表示
 
@@ -57,6 +56,7 @@ def main():
                         rmssd_sigma = 0
                         sdnn = 0
                         rmssd = 0
+                        ratio = 0
 
                         # RRIの平均・分散を計算
                         s = sum(y)
@@ -72,19 +72,14 @@ def main():
                         sdnn = math.sqrt(sdnn_sigma / 50)
                         rmssd = math.sqrt(rmssd_sigma / (50-1))
 
-                        sdnn_array = np.append(sdnn_array, sdnn)
-                        sdnn_array = np.delete(sdnn_array, 0)
-
-                        rmssd_array = np.append(rmssd_array, rmssd)
-                        rmssd_array = np.delete(rmssd_array, 0)
-
-                        #原点を計算
-                        origin = mean(rmssd_array)
+                        ratio = sdnn / rmssd
+                        ratio_array = np.append(ratio_array, ratio)
+                        ratio_array = np.delete(ratio_array, 0)
 
                         xmin = 0  # 数直線の最小値
-                        xmax = max(rmssd_array)  # 数直線の最大値
+                        xmax = max(ratio_array)  # 数直線の最大値
                         plt.tight_layout()  # グラフの自動調整
-                        plt.scatter(sdnn_array, eeg_array, s=10, c='r')  # 散布図
+                        plt.scatter(ratio_array, eeg_array, s=10, c='r')  # 散布図
                         #plt.hlines(y=0, xmin=xmin, xmax=xmax)  # 横軸
                         #plt.vlines(x=[i for i in range(xmin, xmax + 1, 1)], ymin=-0.04, ymax=0.04)  # 目盛り線（大）
                         #plt.vlines(x=[i / 10 for i in range(xmin * 10, xmax * 10 + 1, 1)], ymin=-0.02,
