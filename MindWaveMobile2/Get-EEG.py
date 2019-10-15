@@ -5,8 +5,7 @@ import re
 import numpy as np
 
 PORT = 'COM5'
-
-attention = np.zeros()
+attention = 0
 meditation = 0
 
 for packets in thinkgear.ThinkGearProtocol(PORT).get_packets():
@@ -20,12 +19,12 @@ for packets in thinkgear.ThinkGearProtocol(PORT).get_packets():
             if 'ATTENTION eSense:' in t:
                 # re.sub(正規表現パターン, 置換後文字列, 置換したい文字列)
                 # \D : 10進数でない任意の文字。（全角数字等を含む）
-                attention = re.sub("\\D", "", t)  # 数字のみをattentionとして代入
+                attention = int(re.sub("\\D", "", t))  # 数字のみをattentionとして代入
                 print('attention:',attention)
             if 'MEDITATION eSense:' in t:
                 # re.sub(正規表現パターン, 置換後文字列, 置換したい文字列)
                 # \D : 10進数でない任意の文字。（全角数字等を含む）
-                meditation = re.sub("\\D", "", t)  # 数字のみをattentionとして代入
+                meditation = int(re.sub("\\D", "", t))  # 数字のみをattentionとして代入
                 print('meditation',meditation)
 
         #if int(attention) == 0:  # or int(meditation) == 0:
