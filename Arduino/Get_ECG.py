@@ -12,10 +12,9 @@ from scipy.optimize import curve_fit
 import math
 # グラフの描画
 import matplotlib.pyplot as plt
-from statistics import mean
 import pylab
 
-def main():
+def Get_ECG():
     with serial.Serial('COM6', 115200, timeout=0) as ser:
         # 初期化
         i = 0
@@ -27,12 +26,11 @@ def main():
         sampling_data_set = 50
         int_data = 0
 
-        # 数直線
-        fig, ax = plt.subplots(figsize=(10,10))  # 画像サイズ
+        #  数直線
+        fig, ax = plt.subplots(figsize=(10, 10))  # 画像サイズ
         fig.set_figheight(1)  # 高さ調整
         ax.tick_params(labelbottom=True, bottom=False)  # x軸設定
         ax.tick_params(labelleft=False, left=False)  # y軸設定
-
         # 数直線上の数値を表示
 
         while True:
@@ -73,6 +71,9 @@ def main():
                         rmssd = math.sqrt(rmssd_sigma / (50-1))
 
                         ratio = sdnn / rmssd
+
+                        return ratio
+
                         ratio_array = np.append(ratio_array, ratio)
                         ratio_array = np.delete(ratio_array, 0)
 
@@ -109,6 +110,3 @@ def main():
                 plt.close()
                 pylab.close()
                 ser.close()
-
-if __name__=="__main__":
-    main()
