@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-#import sys, os
+import sys, os
 #sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/Arduino')
 #from Arduino import Get_ECG
 import socket
+import re
 
 # AF = IPv4 という意味
 # TCP/IP の場合は、SOCK_STREAM を使う
@@ -23,14 +24,21 @@ if __name__=="__main__":
                     attention = 0
                     meditation = 0
                     # データを受け取る
-                    data = conn.recv(1024)
-                    if data.decode('utf-8') == 'a':
-                        attention = conn.recv(1024)
-                        print('data : {}, addr: {}, value: {}'.format(data, addr, attention))
-                    elif data.decode('utf-8') == 'm':
-                        meditation = conn.recv(1024)
+                    data = conn.recv(4096)
+                    data_str = data.decode('utf-8')
+                    if 'a' in data_str:
+                        print(data_str)
+                        # re.sub(正規表現パターン, 置換後文字列, 置換したい文字列)
+                        # \D : 10進数でない任意の文字。（全角数字等を含む）
+                        attention = int(re.sub("\\D", "", data_str))  # 数字のみをattentionとして代入
+                        #print('attention : ', attention)
+                    elif 'm' in data_str:
+                        print(data_str)
+                        # re.sub(正規表現パターン, 置換後文字列, 置換したい文字列)
+                        # \D : 10進数でない任意の文字。（全角数字等を含む）
+                        meditation = int(re.sub("\\D", "", data_str))  # 数字のみをmeditationとして代入
+                        #print('meditation : ', meditation)
                     if not data:
                         break
                     # クライアントにデータを返す(b -> byte でないといけない)
-                    print(data)
                     conn.sendall(b'Received: ' + data)
