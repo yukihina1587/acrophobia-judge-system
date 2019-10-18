@@ -14,7 +14,8 @@ import math
 import matplotlib.pyplot as plt
 import pylab
 
-def Get_ECG():
+
+def get_ecg():
     with serial.Serial('COM6', 115200, timeout=0) as ser:
         # 初期化
         i = 0
@@ -91,12 +92,12 @@ def Get_ECG():
                         plt.pause(.01)
 
                         if rmssd < 150:
-                            print('y:',y)
-                            print('s:',s)
-                            print('N:',N)
-                            print('ave:',ave_rri)
-                            print('rmssd_sigma:',rmssd_sigma)
-                            print('rmssd:',rmssd)
+                            print('y:', y)
+                            print('s:', s)
+                            print('N:', N)
+                            print('ave:', ave_rri)
+                            print('rmssd_sigma:', rmssd_sigma)
+                            print('rmssd:', rmssd)
                             print('-------------')
 
                     elif i == 5:
