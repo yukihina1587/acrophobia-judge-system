@@ -13,6 +13,10 @@ import math
 # グラフの描画
 import matplotlib.pyplot as plt
 import pylab
+import sys, os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '..')
+import Get_Value_and_Graph
+import time
 
 
 def get_ecg():
@@ -73,7 +77,7 @@ def get_ecg():
 
                         ratio = sdnn / rmssd
 
-                        return ratio
+                        Get_Value_and_Graph.heart_sampling_value = ratio
 
                         ratio_array = np.append(ratio_array, ratio)
                         ratio_array = np.delete(ratio_array, 0)
@@ -91,7 +95,7 @@ def get_ecg():
                         pylab.box(False)  # 枠を消す
                         plt.pause(.01)
 
-                        if rmssd < 150:
+                        if rmssd > 150:
                             print('y:', y)
                             print('s:', s)
                             print('N:', N)
@@ -99,6 +103,8 @@ def get_ecg():
                             print('rmssd_sigma:', rmssd_sigma)
                             print('rmssd:', rmssd)
                             print('-------------')
+
+                        print(ratio)
 
                     elif i == 5:
                         print('しばらくお待ち下さい')
@@ -111,3 +117,8 @@ def get_ecg():
                 plt.close()
                 pylab.close()
                 ser.close()
+
+def aaa():
+    while True:
+        print("aaa")
+        time.sleep(1)

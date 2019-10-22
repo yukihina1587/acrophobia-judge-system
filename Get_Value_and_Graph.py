@@ -1,21 +1,12 @@
 # -*- coding: utf-8 -*-
 import sys, os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/Arduino')
+
 from Arduino import Get_ECG
 import socket
 import re
 import concurrent.futures
-
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/Arduino')
-
-
-# AF = IPv4 という意味
-# TCP/IP の場合は、SOCK_STREAM を使う
-if __name__ == "__main__":
-    executor = concurrent.futures.ThreadPoolExecutor(max_workers=2)
-    heart_sampling_value = executor.submit(Get_ECG.get_ecg())
-    brainwave_value = executor.submit(get_eeg())
-
-    print(heart_sampling_value)
+import time
 
 
 def get_eeg():
@@ -64,3 +55,28 @@ def get_eeg():
                         # conn.sendall(return_confirm_m)
                     if not data:
                         break
+
+
+def func1():
+    while True:
+        print("func1")
+        time.sleep(1)
+
+def func2():
+    while True:
+        print("func2")
+        time.sleep(1)
+
+
+# AF = IPv4 という意味
+# TCP/IP の場合は、SOCK_STREAM を使う
+if __name__ == "__main__":
+    # executor = concurrent.futures.ThreadPoolExecutor(max_workers=10)
+    executor = concurrent.futures.ThreadPoolExecutor(max_workers=2)
+    heart_sampling_value = executor.submit(Get_ECG.get_ecg)
+    brainwave_value = executor.submit(get_eeg)
+
+    #executor.submit(func1)
+    #executor.submit(func2)
+
+    # print(heart_sampling_value)
