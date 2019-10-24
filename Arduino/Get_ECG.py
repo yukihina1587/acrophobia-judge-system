@@ -1,26 +1,19 @@
 # -*- coding: utf-8 -*-
 import serial
 import numpy as np
-from scipy import signal
-## scipyのモジュールを使う
-from scipy.interpolate import Akima1DInterpolator
-## 図示のために使うもの
-import seaborn as sns
-## フィッティングに使うもの
-from scipy.optimize import curve_fit
-## 平方根の計算
+# 平方根の計算
 import math
-# グラフの描画
-import matplotlib.pyplot as plt
-import pylab
 import sys, os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '..')
 import Get_Value_and_Graph
 import time
 
+connecting_ecg_flag = False
 
 def get_ecg():
+    global connecting_ecg_flag
     with serial.Serial('COM6', 115200, timeout=0) as ser:
+        connecting_ecg_flag = True
         # 初期化
         i = 0
         x = np.zeros(50)
@@ -30,13 +23,6 @@ def get_ecg():
         status = False
         sampling_data_set = 50
         int_data = 0
-
-        #  数直線
-        fig, ax = plt.subplots(figsize=(10, 10))  # 画像サイズ
-        fig.set_figheight(1)  # 高さ調整
-        ax.tick_params(labelbottom=True, bottom=False)  # x軸設定
-        ax.tick_params(labelleft=False, left=False)  # y軸設定
-        # 数直線上の数値を表示
 
         while True:
             try:
@@ -77,23 +63,11 @@ def get_ecg():
 
                         ratio = sdnn / rmssd
 
-                        Get_Value_and_Graph.heart_sampling_value = ratio
-
                         ratio_array = np.append(ratio_array, ratio)
                         ratio_array = np.delete(ratio_array, 0)
 
-                        xmin = 0  # 数直線の最小値
-                        xmax = max(ratio_array)  # 数直線の最大値
-                        plt.tight_layout()  # グラフの自動調整
-                        plt.scatter(ratio_array, eeg_array, s=10, c='r')  # 散布図
-                        #plt.hlines(y=0, xmin=xmin, xmax=xmax)  # 横軸
-                        #plt.vlines(x=[i for i in range(xmin, xmax + 1, 1)], ymin=-0.04, ymax=0.04)  # 目盛り線（大）
-                        #plt.vlines(x=[i / 10 for i in range(xmin * 10, xmax * 10 + 1, 1)], ymin=-0.02,
-                        #           ymax=0.02)  # 目盛り線（小）
-                        line_width = 10  # 目盛り数値の刻み幅
-                        plt.xticks(np.arange(xmin, xmax + line_width, line_width))  # 目盛り数値
-                        pylab.box(False)  # 枠を消す
-                        plt.pause(.01)
+                        Get_Value_and_Graph.heart_sampling_value = ratio_array
+                        print(Get_Value_and_Graph.heart_sampling_value)
 
                         if rmssd > 150:
                             print('y:', y)
@@ -104,8 +78,6 @@ def get_ecg():
                             print('rmssd:', rmssd)
                             print('-------------')
 
-                        print(ratio)
-
                     elif i == 5:
                         print('しばらくお待ち下さい')
                     elif i == 40:
@@ -114,11 +86,9 @@ def get_ecg():
                         print('残り', (51 - i), 'ステップです')
 
             except KeyboardInterrupt:
-                plt.close()
-                pylab.close()
                 ser.close()
+                connecting_ecg_flag = False
 
-def aaa():
-    while True:
-        print("aaa")
-        time.sleep(1)
+
+def get_ecg_flag():
+    return connecting_ecg_flag
