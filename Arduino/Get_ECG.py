@@ -6,14 +6,13 @@ import math
 import sys, os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '..')
 import Get_Value_and_Graph
-import time
 
 connecting_ecg_flag = False
+
 
 def get_ecg():
     global connecting_ecg_flag
     with serial.Serial('COM6', 115200, timeout=0) as ser:
-        connecting_ecg_flag = True
         # 初期化
         i = 0
         x = np.zeros(50)
@@ -41,6 +40,7 @@ def get_ecg():
                         y = np.delete(y, 0)
 
                     if i > 50:
+                        connecting_ecg_flag = True
                         sdnn_sigma = 0
                         rmssd_sigma = 0
                         sdnn = 0
@@ -66,8 +66,7 @@ def get_ecg():
                         ratio_array = np.append(ratio_array, ratio)
                         ratio_array = np.delete(ratio_array, 0)
 
-                        Get_Value_and_Graph.heart_sampling_value = ratio_array
-                        print(Get_Value_and_Graph.heart_sampling_value)
+                        Get_Value_and_Graph.set_ecg_sampling_data(ratio_array)
 
                         if rmssd > 150:
                             print('y:', y)
@@ -79,15 +78,16 @@ def get_ecg():
                             print('-------------')
 
                     elif i == 5:
-                        print('しばらくお待ち下さい')
+                        print('心拍：しばらくお待ち下さい')
                     elif i == 40:
-                        print('残り数ステップです')
+                        print('心拍：残り数ステップです')
                     elif (45 < i) and (i <= 50):
-                        print('残り', (51 - i), 'ステップです')
+                        print('心拍：残り', (51 - i), 'ステップです')
 
             except KeyboardInterrupt:
                 ser.close()
                 connecting_ecg_flag = False
+                break
 
 
 def get_ecg_flag():

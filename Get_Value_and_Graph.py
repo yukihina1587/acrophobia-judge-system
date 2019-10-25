@@ -9,21 +9,25 @@ import numpy as np
 # グラフの描画
 import matplotlib.pyplot as plt
 import pylab
-import numpy as np
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/Arduino')
 
 connecting_eeg_flag = False
-
+meditation_sampling_value = np.zeros(50)
+heart_sampling_value = np.zeros(50)
 
 # AF = IPv4 という意味
 # TCP/IP の場合は、SOCK_STREAM を使う
 def get_eeg():
+    # 変数の初期化
     global connecting_eeg_flag
     attention = 0
     meditation = 0
     attention_array = np.zeros(50)
     meditation_array = np.zeros(50)
+    global meditation_sampling_value
+    i = 0
+
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         # IPアドレスとポートを指定
         s.bind(('127.0.0.1', 50007))
@@ -35,7 +39,6 @@ def get_eeg():
             conn, addr = s.accept()
             with conn:
                 while True:
-                    connecting_eeg_flag = True
                     # データを受け取る
                     data = conn.recv(4096)
                     data_str = data.decode('utf-8')
@@ -62,41 +65,55 @@ def get_eeg():
                         meditation_num = re.sub("\\D", "", data_str)  # 数字のみをmeditationとして代入
                         if meditation_num != '':
                             meditation = int(meditation_num)
+                            i = i + 1
                         else:
                             meditation = 0
 
-                        print('meditation : ', meditation)
-                        # return_confirm_m = ('Received: ' + str(meditation)).encode(encoding='utf-8')
-                        # クライアントにデータを返す(b -> byte でないといけない)
-                        # conn.sendall(return_confirm_m)
-
                         meditation_array = np.append(meditation_array, meditation)
                         meditation_array = np.delete(meditation_array, 0)
+                        meditation_sampling_value = meditation_array
+                        connecting_eeg_flag = True
 
+                        if i > 50:
+                            connecting_eeg_flag = True
+                            #print('meditation : ', meditation)
+                        elif i == 5:
+                            print('脳波：しばらくお待ち下さい')
+                        elif i == 40:
+                            print('脳波：残り数ステップです')
+                        elif (45 < i) and (i <= 50):
+                            print('脳波：残り', (51 - i), 'ステップです')
                     if not data:
                         break
-        connecting_eeg_flag = False
+
+
+def set_ecg_sampling_data(data):
+    global heart_sampling_value
+    heart_sampling_value = data
+    draw_graph()
+    # print(heart_sampling_value)
 
 
 def draw_graph():
-
     #  数直線
     fig, ax = plt.subplots(figsize=(10, 10))  # 画像サイズ
-    fig.set_figheight(1)  # 高さ調整
+    fig.set_figheight(10)  # 高さ調整
+    fig.set_figwidth(10)  # 幅調整
     ax.tick_params(labelbottom=True, bottom=False)  # x軸設定
-    ax.tick_params(labelleft=False, left=False)  # y軸設定
-    print(Get_ECG.get_ecg())
+    ax.tick_params(labelleft=True, left=False)  # y軸設定
     # 数直線上の数値を表示
-    while Get_ECG.get_ecg() or connecting_eeg_flag:
+    # print(Get_ECG.get_ecg_flag(), connecting_eeg_flag)
+    if Get_ECG.get_ecg_flag() or connecting_eeg_flag:
+        print('1')
         try:
-            print('a')
             xmin = 0  # 数直線x軸の最小値
             xmax = 100  # 数直線x軸の最大値
             ymin = 0  # 数直線y軸の最小値
             ymax = max(heart_sampling_value)  # 数直線y軸の最大値
             print(heart_sampling_value)
+            print(meditation_sampling_value)
             plt.tight_layout()  # グラフの自動調整
-            plt.scatter(get_eeg().meditation_array, heart_sampling_value, s=10, c='r')  # 散布図
+            plt.scatter(meditation_sampling_value, heart_sampling_value, s=10, c='r')  # 散布図
             # plt.hlines(y=0, xmin=xmin, xmax=xmax)  # 横軸
             # plt.vlines(x=[i for i in range(xmin, xmax + 1, 1)], ymin=-0.04, ymax=0.04)  # 目盛り線（大）
             # plt.vlines(x=[i / 10 for i in range(xmin * 10, xmax * 10 + 1, 1)], ymin=-0.02,
@@ -108,13 +125,12 @@ def draw_graph():
         except KeyboardInterrupt:
             plt.close()
             pylab.close()
+    else:
+        print('3')
 
 
 if __name__ == "__main__":
-    heart_sampling_value = np.zeros(50)
-
     # マルチスレッドでECGデータとEEGデータの取得を行う
-    executor = concurrent.futures.ThreadPoolExecutor(max_workers=3)
+    executor = concurrent.futures.ThreadPoolExecutor(max_workers=2)
     executor.submit(Get_ECG.get_ecg)
     executor.submit(get_eeg)
-    executor.submit(draw_graph)
