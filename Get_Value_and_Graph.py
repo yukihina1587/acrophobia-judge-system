@@ -13,19 +13,20 @@ import pylab
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/Arduino')
 
 connecting_eeg_flag = False
-meditation_sampling_value = np.zeros(50)
 heart_sampling_value = np.zeros(50)
+
 
 # AF = IPv4 という意味
 # TCP/IP の場合は、SOCK_STREAM を使う
 def get_eeg():
+    print('get_eeg')
     # 変数の初期化
     global connecting_eeg_flag
     attention = 0
     meditation = 0
     attention_array = np.zeros(50)
+    attention_array = np.zeros(50)
     meditation_array = np.zeros(50)
-    global meditation_sampling_value
     i = 0
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -71,18 +72,17 @@ def get_eeg():
 
                         meditation_array = np.append(meditation_array, meditation)
                         meditation_array = np.delete(meditation_array, 0)
-                        meditation_sampling_value = meditation_array
-                        connecting_eeg_flag = True
 
-                        if i > 50:
+                        if i == 51:
                             connecting_eeg_flag = True
-                            #print('meditation : ', meditation)
+                            # print('meditation : ', meditation)
                         elif i == 5:
                             print('脳波：しばらくお待ち下さい')
                         elif i == 40:
                             print('脳波：残り数ステップです')
                         elif (45 < i) and (i <= 50):
                             print('脳波：残り', (51 - i), 'ステップです')
+
                     if not data:
                         break
 
@@ -90,7 +90,8 @@ def get_eeg():
 def set_ecg_sampling_data(data):
     global heart_sampling_value
     heart_sampling_value = data
-    draw_graph()
+    print('set_sampling_data')
+    # draw_graph()
     # print(heart_sampling_value)
 
 
@@ -111,9 +112,9 @@ def draw_graph():
             ymin = 0  # 数直線y軸の最小値
             ymax = max(heart_sampling_value)  # 数直線y軸の最大値
             print(heart_sampling_value)
-            print(meditation_sampling_value)
+            print(meditation_array)
             plt.tight_layout()  # グラフの自動調整
-            plt.scatter(meditation_sampling_value, heart_sampling_value, s=10, c='r')  # 散布図
+            plt.scatter(meditation_array, heart_sampling_value, s=10, c='r')  # 散布図
             # plt.hlines(y=0, xmin=xmin, xmax=xmax)  # 横軸
             # plt.vlines(x=[i for i in range(xmin, xmax + 1, 1)], ymin=-0.04, ymax=0.04)  # 目盛り線（大）
             # plt.vlines(x=[i / 10 for i in range(xmin * 10, xmax * 10 + 1, 1)], ymin=-0.02,
@@ -131,6 +132,7 @@ def draw_graph():
 
 if __name__ == "__main__":
     # マルチスレッドでECGデータとEEGデータの取得を行う
-    executor = concurrent.futures.ThreadPoolExecutor(max_workers=2)
+    executor = concurrent.futures.ThreadPoolExecutor(max_workers=3)
     executor.submit(Get_ECG.get_ecg)
     executor.submit(get_eeg)
+    executor.submit(draw_graph)
