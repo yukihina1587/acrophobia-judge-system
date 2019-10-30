@@ -67,7 +67,7 @@ def get_ecg():
                         ratio_array = np.append(ratio_array, ratio)
                         ratio_array = np.delete(ratio_array, 0)
 
-                        Get_Value_and_Graph.set_ecg_sampling_data(ratio_array)
+                        Get_Value_and_Graph.CollectDataAndGraph.set_ecg_sampling_data(ratio_array)
 
                         if rmssd > 150:
                             print('y:', y)

@@ -13,20 +13,20 @@ import pylab
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/Arduino')
 
 connecting_eeg_flag = False
-heart_sampling_value = np.zeros(50)
+attention_array = np.zeros(50)
+meditation_array = np.zeros(50)
+i = 0
 
 
 # AF = IPv4 という意味
 # TCP/IP の場合は、SOCK_STREAM を使う
 def get_eeg():
-    print('get_eeg')
     # 変数の初期化
     global connecting_eeg_flag
     attention = 0
     meditation = 0
-    attention_array = np.zeros(50)
-    attention_array = np.zeros(50)
-    meditation_array = np.zeros(50)
+    global attention_array
+    global meditation_array
     i = 0
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -73,6 +73,8 @@ def get_eeg():
                         meditation_array = np.append(meditation_array, meditation)
                         meditation_array = np.delete(meditation_array, 0)
 
+                        CollectDataAndGraph.set_eeg_sampling_data(meditation_array)
+
                         if i == 51:
                             connecting_eeg_flag = True
                             # print('meditation : ', meditation)
@@ -87,12 +89,18 @@ def get_eeg():
                         break
 
 
-def set_ecg_sampling_data(data):
-    global heart_sampling_value
-    heart_sampling_value = data
-    print('set_sampling_data')
-    # draw_graph()
-    # print(heart_sampling_value)
+class CollectDataAndGraph:
+
+    @classmethod
+    def set_ecg_sampling_data(self, data):
+        heart_sampling_value = data
+        # draw_graph()
+
+    @classmethod
+    def set_eeg_sampling_data(self, data):
+        meditation_sampling_value = data
+        print('a', heart_sampling_value)
+        print('b', meditation_sampling_value)
 
 
 def draw_graph():
@@ -132,7 +140,6 @@ def draw_graph():
 
 if __name__ == "__main__":
     # マルチスレッドでECGデータとEEGデータの取得を行う
-    executor = concurrent.futures.ThreadPoolExecutor(max_workers=3)
+    executor = concurrent.futures.ThreadPoolExecutor(max_workers=2)
     executor.submit(Get_ECG.get_ecg)
     executor.submit(get_eeg)
-    executor.submit(draw_graph)
