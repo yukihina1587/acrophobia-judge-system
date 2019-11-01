@@ -89,20 +89,6 @@ def get_eeg():
                         break
 
 
-class CollectDataAndGraph:
-
-    @classmethod
-    def set_ecg_sampling_data(self, data):
-        heart_sampling_value = data
-        # draw_graph()
-
-    @classmethod
-    def set_eeg_sampling_data(self, data):
-        meditation_sampling_value = data
-        print('a', heart_sampling_value)
-        print('b', meditation_sampling_value)
-
-
 def draw_graph():
     #  数直線
     fig, ax = plt.subplots(figsize=(10, 10))  # 画像サイズ
@@ -136,6 +122,20 @@ def draw_graph():
             pylab.close()
     else:
         print('3')
+
+
+class CollectDataAndGraph:
+
+    @classmethod
+    def set_ecg_sampling_data(self, data):
+        self.heart_sampling_value = data
+        # draw_graph()
+
+    @classmethod
+    def set_eeg_sampling_data(self, data):
+        self.meditation_sampling_value = data
+        print('a', self.heart_sampling_value)
+        print('b', self.meditation_sampling_value)
 
 
 if __name__ == "__main__":
