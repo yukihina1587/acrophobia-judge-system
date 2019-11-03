@@ -6,11 +6,12 @@ import math
 import sys, os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '..')
 import Get_Value_and_Graph
+from multiprocessing import Value, Array, Process
 
 connecting_ecg_flag = False
 
 
-def get_ecg():
+def get_ecg(count, array):
     global connecting_ecg_flag
     print('get_ecg')
     with serial.Serial('COM6', 115200, timeout=0) as ser:
@@ -67,7 +68,8 @@ def get_ecg():
                         ratio_array = np.append(ratio_array, ratio)
                         ratio_array = np.delete(ratio_array, 0)
 
-                        Get_Value_and_Graph.CollectDataAndGraph.set_ecg_sampling_data(ratio)
+                        # Get_Value_and_Graph.CollectDataAndGraph.set_ecg_sampling_data(ratio)
+                        array.append(ratio)
 
                         if rmssd > 150:
                             print('y:', y)

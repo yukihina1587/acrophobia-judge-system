@@ -4,6 +4,7 @@ from Arduino import Get_ECG
 import socket
 import re
 import concurrent.futures
+from multiprocessing import Value, Array, Process
 import numpy as np
 
 # グラフの描画
@@ -20,7 +21,7 @@ i = 0
 
 # AF = IPv4 という意味
 # TCP/IP の場合は、SOCK_STREAM を使う
-def get_eeg():
+def get_eeg(count, array):
     # 変数の初期化
     global connecting_eeg_flag
     attention = 0
@@ -75,7 +76,7 @@ def get_eeg():
 
                         if i >= 51:
                             connecting_eeg_flag = True
-                            CollectDataAndGraph.set_eeg_sampling_data(connecting_eeg_flag, meditation)
+                            CollectDataAndGraph.set_eeg_sampling_data(count, array, connecting_eeg_flag, meditation)
                             # print('meditation : ', meditation)
                         elif i == 5:
                             print('脳波：しばらくお待ち下さい')
@@ -137,10 +138,11 @@ class CollectDataAndGraph:
         # self.heart_sampling_value = data
 
     @classmethod
-    def set_eeg_sampling_data(self, flag, data):
+    def set_eeg_sampling_data(self, count, array, flag, data):
         self.meditation_sampling_value = np.append(self.meditation_sampling_value, data)
         self.meditation_sampling_value = np.delete(self.meditation_sampling_value, 0)
-        print('eeg', self.i)
+        print('ecg:', array)
+        print('eeg:', data)
         self.i = self.i + 1
         # self.meditation_sampling_value = data
         # draw_graph(flag)
@@ -153,8 +155,22 @@ class CollectDataAndGraph:
 
 
 if __name__ == "__main__":
-    a = CollectDataAndGraph()
     # マルチスレッドでECGデータとEEGデータの取得を行う
-    executor = concurrent.futures.ThreadPoolExecutor(max_workers=2)
-    executor.submit(Get_ECG.get_ecg)
-    executor.submit(get_eeg)
+    with Manager() as manager:
+        # マネージャからValueクラスを作成
+        count = manager.Value('i', 0)
+        # マネージャからListを作成
+        array = manager.list()
+
+        process1 = Process(target=Get_ECG.get_ecg, args=[count, array])
+        process2 = Process(target=get_eeg, args=[count, array])
+
+        process1.start()
+        process2.start()
+
+        process1.join()
+        process2.join()
+
+    #executor = concurrent.futures.ThreadPoolExecutor(max_workers=2)
+    #executor.submit(Get_ECG.get_ecg)
+    #executor.submit(get_eeg)
