@@ -73,8 +73,9 @@ def get_eeg():
                         meditation_array = np.append(meditation_array, meditation)
                         meditation_array = np.delete(meditation_array, 0)
 
-                        if i == 51:
-                            CollectDataAndGraph.set_eeg_sampling_data(connecting_eeg_flag, meditation_array)
+                        if i >= 51:
+                            connecting_eeg_flag = True
+                            CollectDataAndGraph.set_eeg_sampling_data(connecting_eeg_flag, meditation)
                             # print('meditation : ', meditation)
                         elif i == 5:
                             print('脳波：しばらくお待ち下さい')
@@ -87,7 +88,7 @@ def get_eeg():
                         break
 
 
-def draw_graph(connecting_eeg_flag):
+def draw_graph():
     # 数直線
     fig, ax = plt.subplots(figsize=(10, 10))  # 画像サイズ
     fig.set_figheight(10)  # 高さ調整
@@ -123,21 +124,36 @@ def draw_graph(connecting_eeg_flag):
 
 
 class CollectDataAndGraph:
+    heart_sampling_value = np.zeros(50)
+    meditation_sampling_value = np.zeros(50)
+    i = 1
 
     @classmethod
     def set_ecg_sampling_data(self, data):
-        self.heart_sampling_value = data
+        self.heart_sampling_value = np.append(self.heart_sampling_value, data)
+        self.heart_sampling_value = np.delete(self.heart_sampling_value, 0)
+        print('ecg:', self.i)
+        self.i = self.i + 1
+        # self.heart_sampling_value = data
 
     @classmethod
     def set_eeg_sampling_data(self, flag, data):
-        self.meditation_sampling_value = data
+        self.meditation_sampling_value = np.append(self.meditation_sampling_value, data)
+        self.meditation_sampling_value = np.delete(self.meditation_sampling_value, 0)
+        print('eeg', self.i)
+        self.i = self.i + 1
+        # self.meditation_sampling_value = data
         # draw_graph(flag)
-        print('connecting_eeg_flag:', flag)
+        # print('a', self.heart_sampling_value)
+        # print('b', self.meditation_sampling_value)
+
+    def print(self):
         print('a', self.heart_sampling_value)
         print('b', self.meditation_sampling_value)
 
 
 if __name__ == "__main__":
+    a = CollectDataAndGraph()
     # マルチスレッドでECGデータとEEGデータの取得を行う
     executor = concurrent.futures.ThreadPoolExecutor(max_workers=2)
     executor.submit(Get_ECG.get_ecg)

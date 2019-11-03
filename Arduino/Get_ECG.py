@@ -13,7 +13,7 @@ connecting_ecg_flag = False
 def get_ecg():
     global connecting_ecg_flag
     print('get_ecg')
-    with serial.Serial('COM3', 115200, timeout=0) as ser:
+    with serial.Serial('COM6', 115200, timeout=0) as ser:
         # 初期化
         i = 0
         x = np.zeros(50)
@@ -67,7 +67,7 @@ def get_ecg():
                         ratio_array = np.append(ratio_array, ratio)
                         ratio_array = np.delete(ratio_array, 0)
 
-                        Get_Value_and_Graph.CollectDataAndGraph.set_ecg_sampling_data(ratio_array)
+                        Get_Value_and_Graph.CollectDataAndGraph.set_ecg_sampling_data(ratio)
 
                         if rmssd > 150:
                             print('y:', y)
