@@ -73,10 +73,8 @@ def get_eeg():
                         meditation_array = np.append(meditation_array, meditation)
                         meditation_array = np.delete(meditation_array, 0)
 
-                        CollectDataAndGraph.set_eeg_sampling_data(meditation_array)
-
                         if i == 51:
-                            connecting_eeg_flag = True
+                            CollectDataAndGraph.set_eeg_sampling_data(connecting_eeg_flag, meditation_array)
                             # print('meditation : ', meditation)
                         elif i == 5:
                             print('脳波：しばらくお待ち下さい')
@@ -89,8 +87,8 @@ def get_eeg():
                         break
 
 
-def draw_graph():
-    #  数直線
+def draw_graph(connecting_eeg_flag):
+    # 数直線
     fig, ax = plt.subplots(figsize=(10, 10))  # 画像サイズ
     fig.set_figheight(10)  # 高さ調整
     fig.set_figwidth(10)  # 幅調整
@@ -129,11 +127,12 @@ class CollectDataAndGraph:
     @classmethod
     def set_ecg_sampling_data(self, data):
         self.heart_sampling_value = data
-        # draw_graph()
 
     @classmethod
-    def set_eeg_sampling_data(self, data):
+    def set_eeg_sampling_data(self, flag, data):
         self.meditation_sampling_value = data
+        # draw_graph(flag)
+        print('connecting_eeg_flag:', flag)
         print('a', self.heart_sampling_value)
         print('b', self.meditation_sampling_value)
 
