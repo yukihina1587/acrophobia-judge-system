@@ -6,14 +6,13 @@ import math
 import sys, os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '..')
 import Get_Value_and_Graph
-from multiprocessing import Value, Array, Process
 
 connecting_ecg_flag = False
 
 
-def get_ecg(count, array):
+def get_ecg(count, ecg_flag, heart_value, medi_array):
     global connecting_ecg_flag
-    print('get_ecg')
+
     with serial.Serial('COM6', 115200, timeout=0) as ser:
         # 初期化
         i = 0
@@ -33,6 +32,8 @@ def get_ecg(count, array):
                 if rri_data_str != '':
                     int_data = int(rri_data_str)
                     i = i + 1
+                    # Valueオブジェクトの値を操作
+                    count.value += 1
 
                     if (50 < int_data) and (int_data < 300):
                         # 配列をキューと見たてて要素を追加・削除
@@ -43,6 +44,7 @@ def get_ecg(count, array):
 
                     if i > 50:
                         connecting_ecg_flag = True
+                        ecg_flag.value = 1
                         sdnn_sigma = 0
                         rmssd_sigma = 0
                         sdnn = 0
@@ -69,7 +71,8 @@ def get_ecg(count, array):
                         ratio_array = np.delete(ratio_array, 0)
 
                         # Get_Value_and_Graph.CollectDataAndGraph.set_ecg_sampling_data(ratio)
-                        array.append(ratio)
+                        for l in range(50):
+                            heart_value[l] = ratio_array[l]
 
                         if rmssd > 150:
                             print('y:', y)
@@ -90,6 +93,7 @@ def get_ecg(count, array):
             except KeyboardInterrupt:
                 ser.close()
                 connecting_ecg_flag = False
+                ecg_flag.value = 0
                 break
 
 

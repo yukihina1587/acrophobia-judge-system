@@ -21,7 +21,7 @@ i = 0
 
 # AF = IPv4 という意味
 # TCP/IP の場合は、SOCK_STREAM を使う
-def get_eeg(count, array):
+def get_eeg(count, connecting_ecg_flag, heart_sampling_value, meditation_sampling_value):
     # 変数の初期化
     global connecting_eeg_flag
     attention = 0
@@ -68,15 +68,20 @@ def get_eeg(count, array):
                         if meditation_num != '':
                             meditation = int(meditation_num)
                             i = i + 1
+                            # Valueオブジェクトの値を操作
+                            count.value += 1
                         else:
                             meditation = 0
 
                         meditation_array = np.append(meditation_array, meditation)
                         meditation_array = np.delete(meditation_array, 0)
 
+                        for m in range(50):
+                            meditation_sampling_value[m] = meditation_array[m]
+
                         if i >= 51:
                             connecting_eeg_flag = True
-                            CollectDataAndGraph.set_eeg_sampling_data(count, array, connecting_eeg_flag, meditation)
+                            # CollectDataAndGraph.set_eeg_sampling_data(count, array, connecting_eeg_flag, meditation)
                             # print('meditation : ', meditation)
                         elif i == 5:
                             print('脳波：しばらくお待ち下さい')
@@ -89,39 +94,45 @@ def get_eeg(count, array):
                         break
 
 
-def draw_graph():
+def draw_graph(count, connecting_ecg_flag, heart_sampling_value, meditation_sampling_value):
     # 数直線
     fig, ax = plt.subplots(figsize=(10, 10))  # 画像サイズ
     fig.set_figheight(10)  # 高さ調整
     fig.set_figwidth(10)  # 幅調整
-    ax.tick_params(labelbottom=True, bottom=False)  # x軸設定
-    ax.tick_params(labelleft=True, left=False)  # y軸設定
+    ax.tick_params(labelbottom=True, bottom=True)  # x軸設定
+    ax.tick_params(labelleft=True, left=True)  # y軸設定
     # 数直線上の数値を表示
-    # print(Get_ECG.get_ecg_flag(), connecting_eeg_flag)
-    if Get_ECG.get_ecg_flag() or connecting_eeg_flag:
-        print('1')
-        try:
-            xmin = 0  # 数直線x軸の最小値
-            xmax = 100  # 数直線x軸の最大値
-            ymin = 0  # 数直線y軸の最小値
-            ymax = max(heart_sampling_value)  # 数直線y軸の最大値
-            print(heart_sampling_value)
-            print(meditation_array)
-            plt.tight_layout()  # グラフの自動調整
-            plt.scatter(meditation_array, heart_sampling_value, s=10, c='r')  # 散布図
-            # plt.hlines(y=0, xmin=xmin, xmax=xmax)  # 横軸
-            # plt.vlines(x=[i for i in range(xmin, xmax + 1, 1)], ymin=-0.04, ymax=0.04)  # 目盛り線（大）
-            # plt.vlines(x=[i / 10 for i in range(xmin * 10, xmax * 10 + 1, 1)], ymin=-0.02,
-            #           ymax=0.02)  # 目盛り線（小）
-            line_width = 1.5  # 目盛り数値の刻み幅
-            plt.xticks(np.arange(xmin, xmax + line_width, line_width))  # 目盛り数値
-            pylab.box(False)  # 枠を消す
-            plt.pause(.01)
-        except KeyboardInterrupt:
-            plt.close()
-            pylab.close()
-    else:
-        print('3')
+    while True:
+        # print(Get_ECG.get_ecg_flag(), connecting_eeg_flag)
+        # print(count.value)
+        # print(meditation_sampling_value[:])
+        if (connecting_ecg_flag.value == 1) or (connecting_eeg_flag is True):
+            # print('1')
+            try:
+                xmin = 0  # 数直線x軸の最小値
+                xmax = 100  # 数直線x軸の最大値
+                xmid = (xmin + xmax) / 2
+                ymin = 0.2  # 数直線y軸の最小値
+                ymax = 1.0  # 数直線y軸の最大値
+                ymid = 0.6
+                # print(heart_sampling_value[:])
+                # print(meditation_sampling_value[:])
+                plt.tight_layout()  # グラフの自動調整
+                print(meditation_sampling_value[:])
+                plt.scatter(meditation_sampling_value, heart_sampling_value, s=10, c="orange", alpha=0.3)  # 散布図
+                plt.hlines([ymid], xmin, xmax, color='black')  # x_hlines
+                plt.vlines([xmid], ymin, ymax, color='black')  # y_hlines
+                x_line_width = 10  # x軸目盛り数値の刻み幅
+                y_line_width = 0.05  # y軸目盛り数値の刻み幅
+                plt.xticks(np.arange(xmin, xmax + x_line_width, x_line_width))  # x軸目盛り数値
+                plt.yticks(np.arange(ymin, ymax + y_line_width, y_line_width))  # y軸目盛り数値
+                pylab.box(False)  # 枠を消す
+                plt.pause(.01)
+                if meditation_sampling_value[49] < 50 and heart_sampling_value[49] > 0.6:
+
+            except KeyboardInterrupt:
+                plt.close()
+                pylab.close()
 
 
 class CollectDataAndGraph:
@@ -129,48 +140,43 @@ class CollectDataAndGraph:
     meditation_sampling_value = np.zeros(50)
     i = 1
 
-    @classmethod
-    def set_ecg_sampling_data(self, data):
-        self.heart_sampling_value = np.append(self.heart_sampling_value, data)
-        self.heart_sampling_value = np.delete(self.heart_sampling_value, 0)
-        print('ecg:', self.i)
-        self.i = self.i + 1
-        # self.heart_sampling_value = data
+    # @classmethod
+    # def set_ecg_sampling_data(self, data):
+    #     self.heart_sampling_value = np.append(self.heart_sampling_value, data)
+    #     self.heart_sampling_value = np.delete(self.heart_sampling_value, 0)
+    #     # self.heart_sampling_value = data
 
     @classmethod
     def set_eeg_sampling_data(self, count, array, flag, data):
         self.meditation_sampling_value = np.append(self.meditation_sampling_value, data)
         self.meditation_sampling_value = np.delete(self.meditation_sampling_value, 0)
-        print('ecg:', array)
-        print('eeg:', data)
-        self.i = self.i + 1
-        # self.meditation_sampling_value = data
-        # draw_graph(flag)
-        # print('a', self.heart_sampling_value)
-        # print('b', self.meditation_sampling_value)
-
-    def print(self):
-        print('a', self.heart_sampling_value)
-        print('b', self.meditation_sampling_value)
+        # print('ecg:', array[:])
+        # print('eeg:', data)
 
 
 if __name__ == "__main__":
     # マルチスレッドでECGデータとEEGデータの取得を行う
-    with Manager() as manager:
-        # マネージャからValueクラスを作成
-        count = manager.Value('i', 0)
-        # マネージャからListを作成
-        array = manager.list()
+    # 共有メモリの作成
+    # Valueオブジェクトの生成
+    count = Value('i', 0)
+    connecting_ecg_flag = Value('i', 0)
+    # Arrayオブジェクトの生成
+    heart_sampling_value = Array('f', 50)
+    meditation_sampling_value = Array('f', 50)
 
-        process1 = Process(target=Get_ECG.get_ecg, args=[count, array])
-        process2 = Process(target=get_eeg, args=[count, array])
+    process1 = Process(target=Get_ECG.get_ecg, args=[count, connecting_ecg_flag, heart_sampling_value, meditation_sampling_value])
+    process2 = Process(target=get_eeg, args=[count, connecting_ecg_flag, heart_sampling_value, meditation_sampling_value])
+    process3 = Process(target=draw_graph, args=[count, connecting_ecg_flag, heart_sampling_value, meditation_sampling_value])
 
-        process1.start()
-        process2.start()
+    process1.start()
+    process2.start()
+    process3.start()
 
-        process1.join()
-        process2.join()
+    process1.join()
+    process2.join()
+    process3.join()
 
-    #executor = concurrent.futures.ThreadPoolExecutor(max_workers=2)
-    #executor.submit(Get_ECG.get_ecg)
-    #executor.submit(get_eeg)
+
+    # executor = concurrent.futures.ThreadPoolExecutor(max_workers=2)
+    # executor.submit(Get_ECG.get_ecg)
+    # executor.submit(get_eeg)
