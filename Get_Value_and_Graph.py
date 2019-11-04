@@ -96,11 +96,11 @@ def get_eeg(count, connecting_ecg_flag, heart_sampling_value, meditation_samplin
 
 def draw_graph(count, connecting_ecg_flag, heart_sampling_value, meditation_sampling_value):
     # 数直線
-    fig, ax = plt.subplots(figsize=(10, 10))  # 画像サイズ
+    fig = plt.figure(figsize=(10, 10), facecolor="skyblue", linewidth=10, edgecolor="green")
     fig.set_figheight(10)  # 高さ調整
     fig.set_figwidth(10)  # 幅調整
-    ax.tick_params(labelbottom=True, bottom=True)  # x軸設定
-    ax.tick_params(labelleft=True, left=True)  # y軸設定
+    plt.tick_params(labelbottom=True, bottom=True)  # x軸設定
+    plt.tick_params(labelleft=True, left=False)  # y軸設定
     # 数直線上の数値を表示
     while True:
         # print(Get_ECG.get_ecg_flag(), connecting_eeg_flag)
@@ -112,24 +112,26 @@ def draw_graph(count, connecting_ecg_flag, heart_sampling_value, meditation_samp
                 xmin = 0  # 数直線x軸の最小値
                 xmax = 100  # 数直線x軸の最大値
                 xmid = (xmin + xmax) / 2
-                ymin = 0.2  # 数直線y軸の最小値
-                ymax = 1.0  # 数直線y軸の最大値
-                ymid = 0.6
+                ymin = 0.55  # 数直線y軸の最小値
+                ymax = 0.75  # 数直線y軸の最大値
+                ymid = 0.65
                 # print(heart_sampling_value[:])
                 # print(meditation_sampling_value[:])
                 plt.tight_layout()  # グラフの自動調整
                 print(meditation_sampling_value[:])
+                # axL = plt.axes([0.1, 0.1, 0.8, 0.8]) # 画像配置(axes([左, 下, 幅, 高さ])(0～1))
                 plt.scatter(meditation_sampling_value, heart_sampling_value, s=10, c="orange", alpha=0.3)  # 散布図
                 plt.hlines([ymid], xmin, xmax, color='black')  # x_hlines
                 plt.vlines([xmid], ymin, ymax, color='black')  # y_hlines
                 x_line_width = 10  # x軸目盛り数値の刻み幅
-                y_line_width = 0.05  # y軸目盛り数値の刻み幅
+                y_line_width = 0.01  # y軸目盛り数値の刻み幅
                 plt.xticks(np.arange(xmin, xmax + x_line_width, x_line_width))  # x軸目盛り数値
                 plt.yticks(np.arange(ymin, ymax + y_line_width, y_line_width))  # y軸目盛り数値
+                if meditation_sampling_value[49] < 50 and heart_sampling_value[49] > ymid:
+                    # plt.axes([0.6, 0.2, 0.25, 0.3])
+                    plt.text(0.6, 0.2, "Fear_State", size=40, color="blue")
                 pylab.box(False)  # 枠を消す
                 plt.pause(.01)
-                if meditation_sampling_value[49] < 50 and heart_sampling_value[49] > 0.6:
-
             except KeyboardInterrupt:
                 plt.close()
                 pylab.close()
