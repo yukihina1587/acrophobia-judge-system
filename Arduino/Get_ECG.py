@@ -67,8 +67,9 @@ def get_ecg(count, ecg_flag, heart_value, medi_array):
 
                         ratio = sdnn / rmssd
 
-                        ratio_array = np.append(ratio_array, ratio)
-                        ratio_array = np.delete(ratio_array, 0)
+                        if (ratio > 0.4) and (ratio < 1.2):
+                            ratio_array = np.append(ratio_array, ratio)
+                            ratio_array = np.delete(ratio_array, 0)
 
                         # Get_Value_and_Graph.CollectDataAndGraph.set_ecg_sampling_data(ratio)
                         for l in range(50):
