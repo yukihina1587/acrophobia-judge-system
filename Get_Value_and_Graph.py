@@ -97,20 +97,20 @@ def get_eeg(count, connecting_ecg_flag, heart_sampling_value, meditation_samplin
 
 
 def draw_graph(count, connecting_ecg_flag, heart_sampling_value, meditation_sampling_value):
-    # 数直線
-    fig = plt.figure(figsize=(10, 10), facecolor="skyblue", linewidth=10, edgecolor="green")
-    fig.set_figheight(10)  # 高さ調整
-    fig.set_figwidth(10)  # 幅調整
-    gs = gridspec.GridSpec(5, 1)
-    plt.tick_params(labelbottom=True, bottom=True)  # x軸設定
-    plt.tick_params(labelleft=True, left=False)  # y軸設定
+    # fig = plt.figure(figsize=(10, 10), facecolor="skyblue", linewidth=10, edgecolor="green")
+    # fig.set_figheight(10)  # 高さ調整
+    # fig.set_figwidth(10)  # 幅調整
+    # gs = gridspec.GridSpec(5, 2)
+    # plt.tick_params(labelbottom=True, bottom=True)  # x軸設定
+    # plt.tick_params(labelleft=True, left=False)  # y軸設定
     # 数直線上の数値を表示
+
     while True:
         # print(Get_ECG.get_ecg_flag(), connecting_eeg_flag)
         # print(count.value)
         # print(meditation_sampling_value[:])
         dt_now = datetime.datetime.now()
-        if (connecting_ecg_flag.value == 1) or (connecting_eeg_flag is True):
+        if (connecting_ecg_flag.value == 1) and (connecting_eeg_flag is True):
             # print('1')
             try:
                 xmin = 0  # 数直線x軸の最小値
@@ -119,11 +119,19 @@ def draw_graph(count, connecting_ecg_flag, heart_sampling_value, meditation_samp
                 ymin = 0.5  # 数直線y軸の最小値
                 ymax = 1.0  # 数直線y軸の最大値
                 ymid = 0.75
+
+                fig = plt.figure(figsize=(10, 10), facecolor="skyblue", linewidth=10, edgecolor="green")
+                fig.set_figheight(10)  # 高さ調整
+                fig.set_figwidth(10)  # 幅調整
+                gs = gridspec.GridSpec(5, 2)
+                plt.tick_params(labelbottom=True, bottom=True)  # x軸設定
+                plt.tick_params(labelleft=True, left=False)  # y軸設定
+                # 数直線上の数値を表示
                 fear_state_time = np.zeros(100)
                 # print(heart_sampling_value[:])
                 # print(meditation_sampling_value[:])
                 plt.tight_layout()  # グラフの自動調整
-                print(meditation_sampling_value[:])
+                # print(meditation_sampling_value[:])
                 axA = plt.subplot(gs[:3, :])  # gs[0, 0]  ⇒ 左上, gs[0, :]  ⇒ 1行目すべて, gs[:, -1] ⇒ 最終列すべて
                 if (heart_sampling_value[49] < 1.0) and (heart_sampling_value[49] > 0.55):
                     plt.scatter(meditation_sampling_value, heart_sampling_value, s=10, c="orange", alpha=0.3)  # 散布図
@@ -133,14 +141,19 @@ def draw_graph(count, connecting_ecg_flag, heart_sampling_value, meditation_samp
                 y_line_width = 0.1  # y軸目盛り数値の刻み幅
                 plt.xticks(np.arange(xmin, xmax + x_line_width, x_line_width))  # x軸目盛り数値
                 plt.yticks(np.arange(ymin, ymax + y_line_width, y_line_width))  # y軸目盛り数値
-                axU = plt.subplot(gs[4, :])
+                axU = plt.subplot(gs[4, 1])
+                axUR = plt.subplot(gs[4, 0])
                 if meditation_sampling_value[49] < 50 and heart_sampling_value[49] > ymid:
                     axU.tick_params(labelbottom=False, bottom=False)  # x軸設定
                     axU.tick_params(labelleft=False, left=False)  # y軸設定
                     axU.text(0.6, 0.2, "Fear_State", size=40, color="blue")
                     fear_state_time = np.append(fear_state_time, dt_now)
                     fear_state_time = np.delete(fear_state_time, 0)
-                    axU.text(0.1, 0.5, fear_state_time, size=20, color="black")
+                    axUR.tick_params(labelbottom=False, bottom=False)  # x軸設定
+                    axUR.tick_params(labelleft=False, left=False)  # y軸設定
+                    fear_time = "{}\nこんにちは"
+                    axUR.text(0.1, 0.5, fear_time.format(dt_now), size=20, color="black")
+                    print(dt_now)
 
                 else:
                     axU.cla()
