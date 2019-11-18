@@ -5,7 +5,9 @@ import numpy as np
 import math
 import sys, os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '..')
-import Get_Value_and_Graph
+import csv
+import pprint
+import datetime
 
 connecting_ecg_flag = False
 
@@ -26,6 +28,7 @@ def get_ecg(count, ecg_flag, heart_value, medi_array):
 
         while True:
             try:
+                dt_now = datetime.datetime.now()
                 rri_data = ser.read_all()
                 rri_data_str = rri_data.decode('utf-8')
 
@@ -74,6 +77,12 @@ def get_ecg(count, ecg_flag, heart_value, medi_array):
                         # Get_Value_and_Graph.CollectDataAndGraph.set_ecg_sampling_data(ratio)
                         for l in range(50):
                             heart_value[l] = ratio_array[l]
+
+                        with open('データ/heart_info.csv', 'a') as f:
+                            writer = csv.writer(f)
+                            writer.writerow(dt_now)
+                            writer.writerow(y)
+                            writer.writerow(ratio_array)
 
                         if rmssd > 150:
                             print('y:', y)

@@ -83,8 +83,6 @@ def get_eeg(count, connecting_ecg_flag, heart_sampling_value, meditation_samplin
 
                         if i >= 51:
                             connecting_eeg_flag = True
-                            # CollectDataAndGraph.set_eeg_sampling_data(count, array, connecting_eeg_flag, meditation)
-                            # print('meditation : ', meditation)
                         elif i == 5:
                             print('脳波：しばらくお待ち下さい')
                         elif i == 40:
@@ -166,25 +164,6 @@ def draw_graph(count, connecting_ecg_flag, heart_sampling_value, meditation_samp
             except KeyboardInterrupt:
                 plt.close()
                 pylab.close()
-
-
-class CollectDataAndGraph:
-    heart_sampling_value = np.zeros(50)
-    meditation_sampling_value = np.zeros(50)
-    i = 1
-
-    # @classmethod
-    # def set_ecg_sampling_data(self, data):
-    #     self.heart_sampling_value = np.append(self.heart_sampling_value, data)
-    #     self.heart_sampling_value = np.delete(self.heart_sampling_value, 0)
-    #     # self.heart_sampling_value = data
-
-    @classmethod
-    def set_eeg_sampling_data(self, count, array, flag, data):
-        self.meditation_sampling_value = np.append(self.meditation_sampling_value, data)
-        self.meditation_sampling_value = np.delete(self.meditation_sampling_value, 0)
-        # print('ecg:', array[:])
-        # print('eeg:', data)
 
 
 if __name__ == "__main__":
