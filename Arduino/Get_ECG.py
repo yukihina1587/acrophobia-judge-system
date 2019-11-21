@@ -12,7 +12,7 @@ import datetime
 connecting_ecg_flag = False
 
 
-def get_ecg(count, ecg_flag, heart_value, medi_array):
+def get_ecg(default_threshold, ecg_flag, heart_value, medi_array):
     global connecting_ecg_flag
 
     with serial.Serial('COM6', 115200, timeout=0) as ser:
@@ -35,8 +35,6 @@ def get_ecg(count, ecg_flag, heart_value, medi_array):
                 if rri_data_str != '':
                     int_data = int(rri_data_str)
                     i = i + 1
-                    # Valueオブジェクトの値を操作
-                    count.value += 1
 
                     if (50 < int_data) and (int_data < 300):
                         # 配列をキューと見たてて要素を追加・削除
@@ -69,6 +67,9 @@ def get_ecg(count, ecg_flag, heart_value, medi_array):
                         rmssd = math.sqrt(rmssd_sigma / (50-1))
 
                         ratio = sdnn / rmssd
+
+                        if i == 51:
+                            default_threshold.Value = ratio
 
                         if (ratio > 0.4) and (ratio < 1.2):
                             ratio_array = np.append(ratio_array, ratio)

@@ -23,7 +23,7 @@ i = 0
 
 # AF = IPv4 という意味
 # TCP/IP の場合は、SOCK_STREAM を使う
-def get_eeg(count, connecting_ecg_flag, heart_sampling_value, meditation_sampling_value):
+def get_eeg(default_threashold, connecting_ecg_flag, heart_sampling_value, meditation_sampling_value):
     # 変数の初期化
     global connecting_eeg_flag
     attention = 0
@@ -70,8 +70,6 @@ def get_eeg(count, connecting_ecg_flag, heart_sampling_value, meditation_samplin
                         if meditation_num != '':
                             meditation = int(meditation_num)
                             i = i + 1
-                            # Valueオブジェクトの値を操作
-                            count.value += 1
                         else:
                             meditation = 0
 
@@ -94,7 +92,7 @@ def get_eeg(count, connecting_ecg_flag, heart_sampling_value, meditation_samplin
                         break
 
 
-def draw_graph(count, connecting_ecg_flag, heart_sampling_value, meditation_sampling_value):
+def draw_graph(default_threshold, connecting_ecg_flag, heart_sampling_value, meditation_sampling_value):
     # fig = plt.figure(figsize=(10, 10), facecolor="skyblue", linewidth=10, edgecolor="green")
     # fig.set_figheight(10)  # 高さ調整
     # fig.set_figwidth(10)  # 幅調整
@@ -116,7 +114,7 @@ def draw_graph(count, connecting_ecg_flag, heart_sampling_value, meditation_samp
                 xmid = (xmin + xmax) / 2
                 ymin = 0.5  # 数直線y軸の最小値
                 ymax = 1.0  # 数直線y軸の最大値
-                ymid = 0.75
+                ymid = default_threshold.Value
 
                 fig = plt.figure(figsize=(10, 10), facecolor="skyblue", linewidth=10, edgecolor="green")
                 fig.set_figheight(10)  # 高さ調整
