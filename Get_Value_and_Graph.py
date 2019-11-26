@@ -106,7 +106,7 @@ def draw_graph(default_threshold, connecting_ecg_flag, heart_sampling_value, med
         # print(count.value)
         # print(meditation_sampling_value[:])
         dt_now = datetime.datetime.now()
-        if (connecting_ecg_flag.value == 1) and (connecting_eeg_flag is True):
+        if (connecting_ecg_flag.value == 1) or (connecting_eeg_flag is True):
             # print('1')
             try:
                 xmin = 0  # 数直線x軸の最小値
@@ -114,14 +114,14 @@ def draw_graph(default_threshold, connecting_ecg_flag, heart_sampling_value, med
                 xmid = (xmin + xmax) / 2
                 ymin = 0.5  # 数直線y軸の最小値
                 ymax = 1.0  # 数直線y軸の最大値
-                ymid = default_threshold.Value
+                ymid = default_threshold.value
 
-                fig = plt.figure(figsize=(10, 10), facecolor="skyblue", linewidth=10, edgecolor="green")
-                fig.set_figheight(10)  # 高さ調整
-                fig.set_figwidth(10)  # 幅調整
-                gs = gridspec.GridSpec(5, 2)
-                plt.tick_params(labelbottom=True, bottom=True)  # x軸設定
-                plt.tick_params(labelleft=True, left=False)  # y軸設定
+                # fig = plt.figure(figsize=(10, 10), facecolor="skyblue", linewidth=10, edgecolor="green")
+                # fig.set_figheight(10)  # 高さ調整
+                # fig.set_figwidth(10)  # 幅調整
+                # gs = gridspec.GridSpec(5, 2)
+                # plt.tick_params(labelbottom=True, bottom=True)  # x軸設定
+                # plt.tick_params(labelleft=True, left=False)  # y軸設定
                 # 数直線上の数値を表示
                 fear_state_time = np.zeros(100)
                 # print(heart_sampling_value[:])
@@ -168,15 +168,18 @@ if __name__ == "__main__":
     # マルチスレッドでECGデータとEEGデータの取得を行う
     # 共有メモリの作成
     # Valueオブジェクトの生成
-    count = Value('i', 0)
+    default_threshold = Value('i', 0)
     connecting_ecg_flag = Value('i', 0)
     # Arrayオブジェクトの生成
     heart_sampling_value = Array('f', 50)
     meditation_sampling_value = Array('f', 50)
 
-    process1 = Process(target=Get_ECG.get_ecg, args=[count, connecting_ecg_flag, heart_sampling_value, meditation_sampling_value])
-    process2 = Process(target=get_eeg, args=[count, connecting_ecg_flag, heart_sampling_value, meditation_sampling_value])
-    process3 = Process(target=draw_graph, args=[count, connecting_ecg_flag, heart_sampling_value, meditation_sampling_value])
+    process1 = Process(target=Get_ECG.get_ecg, args=[default_threshold, connecting_ecg_flag,
+                                                     heart_sampling_value, meditation_sampling_value])
+    process2 = Process(target=get_eeg, args=[default_threshold, connecting_ecg_flag,
+                                             heart_sampling_value, meditation_sampling_value])
+    process3 = Process(target=draw_graph, args=[default_threshold, connecting_ecg_flag,
+                                                heart_sampling_value, meditation_sampling_value])
 
     process1.start()
     process2.start()
