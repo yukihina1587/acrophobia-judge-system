@@ -55,11 +55,6 @@ def get_eeg(default_threashold, connecting_ecg_flag, heart_sampling_value, medit
                         else:
                             attention = 0
 
-                        # print('attention : ', attention)
-                        # return_confirm_a = ('Received: ' + str(attention)).encode(encoding='utf-8')
-                        # クライアントにデータを返す(b -> byte でないといけない)
-                        # conn.sendall(return_confirm_a)
-
                         attention_array = np.append(attention_array, attention)
                         attention_array = np.delete(attention_array, 0)
 
@@ -93,21 +88,17 @@ def get_eeg(default_threashold, connecting_ecg_flag, heart_sampling_value, medit
 
 
 def draw_graph(default_threshold, connecting_ecg_flag, heart_sampling_value, meditation_sampling_value):
-    # fig = plt.figure(figsize=(10, 10), facecolor="skyblue", linewidth=10, edgecolor="green")
-    # fig.set_figheight(10)  # 高さ調整
-    # fig.set_figwidth(10)  # 幅調整
-    # gs = gridspec.GridSpec(5, 2)
-    # plt.tick_params(labelbottom=True, bottom=True)  # x軸設定
-    # plt.tick_params(labelleft=True, left=False)  # y軸設定
+    fig = plt.figure(figsize=(10, 10), facecolor="skyblue", linewidth=10, edgecolor="green")
+    fig.set_figheight(10)  # 高さ調整
+    fig.set_figwidth(10)  # 幅調整
+    gs = gridspec.GridSpec(5, 2)
+    plt.tick_params(labelbottom=True, bottom=True)  # x軸設定
+    plt.tick_params(labelleft=True, left=False)  # y軸設定
     # 数直線上の数値を表示
 
     while True:
-        # print(Get_ECG.get_ecg_flag(), connecting_eeg_flag)
-        # print(count.value)
-        # print(meditation_sampling_value[:])
         dt_now = datetime.datetime.now()
-        if (connecting_ecg_flag.value == 1) or (connecting_eeg_flag is True):
-            # print('1')
+        if (connecting_ecg_flag.value == 1) and (meditation_sampling_value[49] != 0):
             try:
                 xmin = 0  # 数直線x軸の最小値
                 xmax = 100  # 数直線x軸の最大値
@@ -124,38 +115,44 @@ def draw_graph(default_threshold, connecting_ecg_flag, heart_sampling_value, med
                 # plt.tick_params(labelleft=True, left=False)  # y軸設定
                 # 数直線上の数値を表示
                 fear_state_time = np.zeros(100)
-                # print(heart_sampling_value[:])
-                # print(meditation_sampling_value[:])
-                plt.tight_layout()  # グラフの自動調整
-                # print(meditation_sampling_value[:])
-                axA = plt.subplot(gs[:3, :])  # gs[0, 0]  ⇒ 左上, gs[0, :]  ⇒ 1行目すべて, gs[:, -1] ⇒ 最終列すべて
-                if (heart_sampling_value[49] < 1.0) and (heart_sampling_value[49] > 0.55):
+                axU = plt.subplot(gs[4, 1])  # gs[0, 0]  ⇒ 左上, gs[0, :]  ⇒ 1行目すべて, gs[:, -1] ⇒ 最終列すべて
+                axUR = plt.subplot(gs[4, 0])
+
+                if heart_sampling_value[0] > 0.5 and meditation_sampling_value[0] != 0:
+                    axA = plt.subplot(gs[:3, :])
                     plt.scatter(meditation_sampling_value, heart_sampling_value, s=10, c="orange", alpha=0.3)  # 散布図
-                axA.hlines([ymid], xmin, xmax, color='black')  # x_hlines
-                axA.vlines([xmid], ymin, ymax, color='black')  # y_hlines
+
+                    if meditation_sampling_value[49] < 50 and heart_sampling_value[49] > ymid:
+                        axU.tick_params(labelbottom=False, bottom=False)  # x軸設定
+                        axU.tick_params(labelleft=False, left=False)  # y軸設定
+                        axU.text(0.6, 0.2, "Fear_State", size=40, color="blue")
+                        fear_state_time = np.append(fear_state_time, dt_now)
+                        fear_state_time = np.delete(fear_state_time, 0)
+                        axUR.tick_params(labelbottom=False, bottom=False)  # x軸設定
+                        axUR.tick_params(labelleft=False, left=False)  # y軸設定
+                        fear_time = "{}\nこんにちは"
+                        axUR.text(0.1, 0.5, fear_time.format(dt_now), size=20, color="black")
+                        print(dt_now)
+
+                    else:
+                        axU.cla()
+                        axUR.cla()
+                        axU.tick_params(labelbottom=False, bottom=False)  # x軸設定
+                        axU.tick_params(labelleft=False, left=False)  # y軸設定
+                        axU.text(0.6, 0.2, "", size=40, color="blue")
+                        axUR.tick_params(labelbottom=False, bottom=False)  # x軸設定
+                        axUR.tick_params(labelleft=False, left=False)  # y軸設定
+                        axUR.text(0.6, 0.2, "", size=40, color="blue")
+
+                if ymid > 0.4:
+                    axA.hlines([ymid], xmin, xmax, color='black')  # x_hlines
+                    axA.vlines([xmid], ymin, ymax, color='black')  # y_hlines
+
                 x_line_width = 10  # x軸目盛り数値の刻み幅
                 y_line_width = 0.1  # y軸目盛り数値の刻み幅
                 plt.xticks(np.arange(xmin, xmax + x_line_width, x_line_width))  # x軸目盛り数値
                 plt.yticks(np.arange(ymin, ymax + y_line_width, y_line_width))  # y軸目盛り数値
-                axU = plt.subplot(gs[4, 1])
-                axUR = plt.subplot(gs[4, 0])
-                if meditation_sampling_value[49] < 50 and heart_sampling_value[49] > ymid:
-                    axU.tick_params(labelbottom=False, bottom=False)  # x軸設定
-                    axU.tick_params(labelleft=False, left=False)  # y軸設定
-                    axU.text(0.6, 0.2, "Fear_State", size=40, color="blue")
-                    fear_state_time = np.append(fear_state_time, dt_now)
-                    fear_state_time = np.delete(fear_state_time, 0)
-                    axUR.tick_params(labelbottom=False, bottom=False)  # x軸設定
-                    axUR.tick_params(labelleft=False, left=False)  # y軸設定
-                    fear_time = "{}\nこんにちは"
-                    axUR.text(0.1, 0.5, fear_time.format(dt_now), size=20, color="black")
-                    print(dt_now)
 
-                else:
-                    axU.cla()
-                    axU.tick_params(labelbottom=False, bottom=False)  # x軸設定
-                    axU.tick_params(labelleft=False, left=False)  # y軸設定
-                    axU.text(0.6, 0.2, "", size=40, color="blue")
                 pylab.box(False)  # 枠を消す
                 plt.pause(.01)
 
@@ -168,7 +165,7 @@ if __name__ == "__main__":
     # マルチスレッドでECGデータとEEGデータの取得を行う
     # 共有メモリの作成
     # Valueオブジェクトの生成
-    default_threshold = Value('i', 0)
+    default_threshold = Value('f', 0)
     connecting_ecg_flag = Value('i', 0)
     # Arrayオブジェクトの生成
     heart_sampling_value = Array('f', 50)
@@ -188,8 +185,3 @@ if __name__ == "__main__":
     process1.join()
     process2.join()
     process3.join()
-
-
-    # executor = concurrent.futures.ThreadPoolExecutor(max_workers=2)
-    # executor.submit(Get_ECG.get_ecg)
-    # executor.submit(get_eeg)

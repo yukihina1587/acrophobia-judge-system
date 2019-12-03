@@ -6,7 +6,6 @@ import math
 import sys, os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '..')
 import csv
-import pprint
 import datetime
 
 
@@ -66,25 +65,25 @@ def get_ecg(default_threshold, ecg_flag, heart_value, medi_array):
 
                         ratio = sdnn / rmssd
 
-                        if (i == 51 + q) and (ratio != 0) and (not threshold_flag):
-                            q = q + 1
-                            default_threshold.value = ratio
-                            if default_threshold != 0:
-                                threshold_flag = True
-
                         if (ratio > 0.4) and (ratio < 1.2):
                             ratio_array = np.append(ratio_array, ratio)
                             ratio_array = np.delete(ratio_array, 0)
 
-                        # Get_Value_and_Graph.CollectDataAndGraph.set_ecg_sampling_data(ratio)
+                        if (ratio_array[0] > 0.5) and not threshold_flag:
+                            threshold_flag = True
+                            default_sum = sum(ratio_array)
+                            ave = default_sum / 50
+                            default_threshold.value = ave
+
                         for l in range(50):
                             heart_value[l] = ratio_array[l]
 
-                        with open('データ/heart_info.csv', 'a') as f:
-                            writer = csv.writer(f)
-                            # writer.writerow(dt_now)
-                            writer.writerow(y)
-                            writer.writerow(ratio_array)
+                        with open('データ/vital_info.csv', 'a') as f:
+                            if ratio_array[0] > 0.4:
+                                writer = csv.writer(f)
+                                # writer.writerow(dt_now)
+                                writer.writerow(medi_array)
+                                writer.writerow(ratio_array)
 
                         if rmssd > 150:
                             print('y:', y)
