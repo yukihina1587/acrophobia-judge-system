@@ -122,7 +122,8 @@ def draw_graph(default_threshold, connecting_ecg_flag, heart_sampling_value, med
                     axA = plt.subplot(gs[:3, :])
                     plt.scatter(meditation_sampling_value, heart_sampling_value, s=10, c="orange", alpha=0.3)  # 散布図
 
-                    if meditation_sampling_value[49] < 50 and heart_sampling_value[49] > ymid:
+                    if (meditation_sampling_value[49] > 20) and (meditation_sampling_value[49] < 50) \
+                            and (heart_sampling_value[49] > ymid) and (heart_sampling_value[49] < 1.0):
                         axU.tick_params(labelbottom=False, bottom=False)  # x軸設定
                         axU.tick_params(labelleft=False, left=False)  # y軸設定
                         axU.text(0.6, 0.2, "Fear_State", size=40, color="blue")
