@@ -79,7 +79,7 @@ def get_ecg(default_threshold, ecg_flag, heart_value, medi_array):
 
                                     with open('データ/vital_info.csv', 'a') as f:
                                         writer = csv.writer(f)
-                                        # writer.writerow(dt_now)
+                                        writer.writerow(dt_now.strftime('%Y-%m-%d %H:%M:%S'))
                                         writer.writerow(medi_array)
                                         writer.writerow(ratio_array)
 
