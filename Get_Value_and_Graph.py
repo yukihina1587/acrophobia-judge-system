@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys, os
-from Arduino import Get_ECG
+from Arduino import Get_ECG_re2, Get_ECG
 import socket
 import re
 import concurrent.futures
@@ -15,22 +15,17 @@ import matplotlib.gridspec as gridspec
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/Arduino')
 
-connecting_eeg_flag = False
-attention_array = np.zeros(50)
-meditation_array = np.zeros(50)
-i = 0
-
 
 # AF = IPv4 という意味
 # TCP/IP の場合は、SOCK_STREAM を使う
 def get_eeg(default_threashold, connecting_ecg_flag, heart_sampling_value, meditation_sampling_value):
     # 変数の初期化
-    global connecting_eeg_flag
+    connecting_eeg_flag = False
+    i = 0
     attention = 0
     meditation = 0
-    global attention_array
-    global meditation_array
-    i = 0
+    attention_array = np.zeros(50)
+    meditation_array = np.zeros(50)
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         # IPアドレスとポートを指定
@@ -39,62 +34,68 @@ def get_eeg(default_threashold, connecting_ecg_flag, heart_sampling_value, medit
         s.listen(1)
         # connection するまで待つ
         while True:
-            # 誰かがアクセスしてきたら、コネクションとアドレスを入れる
-            conn, addr = s.accept()
-            with conn:
-                while True:
-                    # データを受け取る
-                    data = conn.recv(4096)
-                    data_str = data.decode('utf-8')
-                    if 'a' in data_str:
-                        # re.sub(正規表現パターン, 置換後文字列, 置換したい文字列)
-                        # \D : 10進数でない任意の文字。（全角数字等を含む）
-                        attention_num = re.sub("\\D", "", data_str)  # 数字のみをattentionとして代入
-                        if attention_num != '':
-                            attention = int(attention_num)
-                        else:
-                            attention = 0
+            try:
+                # 誰かがアクセスしてきたら、コネクションとアドレスを入れる
+                conn, addr = s.accept()
+                with conn:
+                    while True:
+                        # データを受け取る
+                        data = conn.recv(4096)
+                        data_str = data.decode('utf-8')
+                        if 'a' in data_str:
+                            # re.sub(正規表現パターン, 置換後文字列, 置換したい文字列)
+                            # \D : 10進数でない任意の文字。（全角数字等を含む）
+                            attention_num = re.sub("\\D", "", data_str)  # 数字のみをattentionとして代入
+                            if attention_num != '':
+                                attention = int(attention_num)
+                            else:
+                                attention = 0
 
-                        attention_array = np.append(attention_array, attention)
-                        attention_array = np.delete(attention_array, 0)
+                            attention_array = np.append(attention_array, attention)
+                            attention_array = np.delete(attention_array, 0)
 
-                    elif 'm' in data_str:
-                        # re.sub(正規表現パターン, 置換後文字列, 置換したい文字列)
-                        # \D : 10進数でない任意の文字。（全角数字等を含む）
-                        meditation_num = re.sub("\\D", "", data_str)  # 数字のみをmeditationとして代入
-                        if meditation_num != '':
-                            meditation = int(meditation_num)
-                            i = i + 1
-                        else:
-                            meditation = 0
+                        elif 'm' in data_str:
+                            # re.sub(正規表現パターン, 置換後文字列, 置換したい文字列)
+                            # \D : 10進数でない任意の文字。（全角数字等を含む）
+                            meditation_num = re.sub("\\D", "", data_str)  # 数字のみをmeditationとして代入
+                            if meditation_num != '':
+                                meditation = int(meditation_num)
+                                i = i + 1
+                            else:
+                                meditation = 0
 
-                        meditation_array = np.append(meditation_array, meditation)
-                        meditation_array = np.delete(meditation_array, 0)
+                            meditation_array = np.append(meditation_array, meditation)
+                            meditation_array = np.delete(meditation_array, 0)
 
-                        for m in range(50):
-                            meditation_sampling_value[m] = meditation_array[m]
+                            for m in range(50):
+                                meditation_sampling_value[m] = meditation_array[m]
 
-                        if i >= 51:
-                            connecting_eeg_flag = True
-                        elif i == 5:
-                            print('脳波：しばらくお待ち下さい')
-                        elif i == 40:
-                            print('脳波：残り数ステップです')
-                        elif (45 < i) and (i <= 50):
-                            print('脳波：残り', (51 - i), 'ステップです')
+                            if i == 4:
+                                connecting_eeg_flag = True
+                                print('脳波：しばらくお待ち下さい')
+                            elif i == 39:
+                                print('脳波：残り数ステップです')
+                            elif i == 49:
+                                print('脳波：準備が整いました')
 
-                    if not data:
-                        break
+                        if not data:
+                            break
+
+            except KeyboardInterrupt:
+                break
 
 
 def draw_graph(default_threshold, connecting_ecg_flag, heart_sampling_value, meditation_sampling_value):
-    fig = plt.figure(figsize=(10, 10), facecolor="skyblue", linewidth=10, edgecolor="green")
+    fig = plt.figure(figsize=(10, 10), facecolor="white", linewidth=10, edgecolor="blue")
     fig.set_figheight(10)  # 高さ調整
     fig.set_figwidth(10)  # 幅調整
     gs = gridspec.GridSpec(5, 2)
     plt.tick_params(labelbottom=True, bottom=True)  # x軸設定
     plt.tick_params(labelleft=True, left=False)  # y軸設定
     # 数直線上の数値を表示
+
+    line_flag = False
+    #変数の初期化
 
     while True:
         dt_now = datetime.datetime.now()
@@ -126,13 +127,13 @@ def draw_graph(default_threshold, connecting_ecg_flag, heart_sampling_value, med
                             and (heart_sampling_value[49] > ymid) and (heart_sampling_value[49] < 1.0):
                         axU.tick_params(labelbottom=False, bottom=False)  # x軸設定
                         axU.tick_params(labelleft=False, left=False)  # y軸設定
-                        axU.text(0.6, 0.2, "Fear_State", size=40, color="blue")
+                        axU.text(0.1, 0.1, "Fear_State", size=40, color="blue")
                         fear_state_time = np.append(fear_state_time, dt_now)
                         fear_state_time = np.delete(fear_state_time, 0)
                         axUR.tick_params(labelbottom=False, bottom=False)  # x軸設定
                         axUR.tick_params(labelleft=False, left=False)  # y軸設定
-                        fear_time = "{}\nこんにちは"
-                        axUR.text(0.1, 0.5, fear_time.format(dt_now), size=20, color="black")
+                        fear_time = "Time : \n{}"
+                        axUR.text(0.1, 0.1, fear_time.format(dt_now), size=10, color="black")
                         print(dt_now)
 
                     else:
@@ -140,14 +141,16 @@ def draw_graph(default_threshold, connecting_ecg_flag, heart_sampling_value, med
                         axUR.cla()
                         axU.tick_params(labelbottom=False, bottom=False)  # x軸設定
                         axU.tick_params(labelleft=False, left=False)  # y軸設定
-                        axU.text(0.6, 0.2, "", size=40, color="blue")
+                        axU.text(0.1, 0.1, "", size=40, color="blue")
                         axUR.tick_params(labelbottom=False, bottom=False)  # x軸設定
                         axUR.tick_params(labelleft=False, left=False)  # y軸設定
-                        axUR.text(0.6, 0.2, "", size=40, color="blue")
+                        axUR.text(0.1, 0.1, "", size=10, color="black")
 
-                if ymid > 0.4:
+                if (ymid > 0.4) and (not line_flag):
                     axA.hlines([ymid], xmin, xmax, color='black')  # x_hlines
                     axA.vlines([xmid], ymin, ymax, color='black')  # y_hlines
+                    print('a')
+                    line_flag = True
 
                 x_line_width = 10  # x軸目盛り数値の刻み幅
                 y_line_width = 0.1  # y軸目盛り数値の刻み幅
