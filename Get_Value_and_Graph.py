@@ -107,15 +107,8 @@ def draw_graph(default_threshold, connecting_ecg_flag, heart_sampling_value, med
                 ymin = 0.5  # 数直線y軸の最小値
                 ymax = 1.0  # 数直線y軸の最大値
                 ymid = default_threshold.value
-
-                # fig = plt.figure(figsize=(10, 10), facecolor="skyblue", linewidth=10, edgecolor="green")
-                # fig.set_figheight(10)  # 高さ調整
-                # fig.set_figwidth(10)  # 幅調整
-                # gs = gridspec.GridSpec(5, 2)
-                # plt.tick_params(labelbottom=True, bottom=True)  # x軸設定
-                # plt.tick_params(labelleft=True, left=False)  # y軸設定
-                # 数直線上の数値を表示
                 fear_state_time = np.zeros(100)
+                fear_state_flag = False
                 axU = plt.subplot(gs[4, 1])  # gs[0, 0]  ⇒ 左上, gs[0, :]  ⇒ 1行目すべて, gs[:, -1] ⇒ 最終列すべて
                 axUR = plt.subplot(gs[4, 0])
 
@@ -128,6 +121,7 @@ def draw_graph(default_threshold, connecting_ecg_flag, heart_sampling_value, med
                         axU.tick_params(labelbottom=False, bottom=False)  # x軸設定
                         axU.tick_params(labelleft=False, left=False)  # y軸設定
                         axU.text(0.1, 0.1, "Fear_State", size=40, color="blue")
+                        fear_state_flag = True
                         fear_state_time = np.append(fear_state_time, dt_now)
                         fear_state_time = np.delete(fear_state_time, 0)
                         axUR.tick_params(labelbottom=False, bottom=False)  # x軸設定
@@ -175,7 +169,11 @@ if __name__ == "__main__":
     heart_sampling_value = Array('f', 50)
     meditation_sampling_value = Array('f', 50)
 
-    process1 = Process(target=Get_ECG.get_ecg, args=[default_threshold, connecting_ecg_flag,
+    # ユーザ名の入力
+    username = input()
+    print(username, 'さんのバイタルデータを取得します')
+
+    process1 = Process(target=Get_ECG.get_ecg, args=[default_threshold, connecting_ecg_flag, username,
                                                      heart_sampling_value, meditation_sampling_value])
     process2 = Process(target=get_eeg, args=[default_threshold, connecting_ecg_flag,
                                              heart_sampling_value, meditation_sampling_value])
