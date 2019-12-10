@@ -4,14 +4,12 @@ import numpy as np
 # 平方根の計算
 import math
 import sys, os
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '..')
-import csv
 import datetime
 
 
-def get_ecg(default_threshold, ecg_flag, username, heart_value, medi_array):
+def get_ecg(default_threshold, ecg_flag, heart_value, medi_array):
 
-    with serial.Serial('COM3', 115200, timeout=0) as ser:
+    with serial.Serial('COM6', 115200, timeout=0) as ser:
         # 初期化
         i = 0
         x = np.zeros(50)
@@ -76,14 +74,6 @@ def get_ecg(default_threshold, ecg_flag, username, heart_value, medi_array):
 
                                     for l in range(sampling_data_set):
                                         heart_value[l] = ratio_array[l]
-
-                                    filename = 'データ/' + str(username) + dt_now.strftime('%Y-%m-%d-%H:%M') \
-                                               + 'vital_info.csv'
-                                    with open(filename, 'a') as f:
-                                        writer = csv.writer(f)
-                                        writer.writerow(dt_now.strftime('%Y-%m-%d %H:%M:%S'))
-                                        writer.writerow(medi_array)
-                                        writer.writerow(ratio_array)
 
                                 elif ratio_array[45] > 0.5 and ratio_array[44] == 0:
                                     print('心拍：しばらくお待ち下さい')

@@ -13,6 +13,9 @@ import matplotlib.pyplot as plt
 import pylab
 import matplotlib.gridspec as gridspec
 
+# ファイルへの出力
+import csv
+
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/Arduino')
 
 
@@ -85,7 +88,7 @@ def get_eeg(default_threashold, connecting_ecg_flag, heart_sampling_value, medit
                 break
 
 
-def draw_graph(default_threshold, connecting_ecg_flag, heart_sampling_value, meditation_sampling_value):
+def draw_graph(default_threshold, connecting_ecg_flag, username, heart_sampling_value, meditation_sampling_value):
     fig = plt.figure(figsize=(10, 10), facecolor="white", linewidth=10, edgecolor="blue")
     fig.set_figheight(10)  # 高さ調整
     fig.set_figwidth(10)  # 幅調整
@@ -96,6 +99,8 @@ def draw_graph(default_threshold, connecting_ecg_flag, heart_sampling_value, med
 
     line_flag = False
     #変数の初期化
+    starttime = datetime.datetime.now()
+    filename = 'データ/' + str(username) + starttime.strftime('%Y-%m-%d-%H_%M') + 'vital_info.csv'
 
     while True:
         dt_now = datetime.datetime.now()
@@ -105,7 +110,7 @@ def draw_graph(default_threshold, connecting_ecg_flag, heart_sampling_value, med
                 xmax = 100  # 数直線x軸の最大値
                 xmid = (xmin + xmax) / 2
                 ymin = 0.5  # 数直線y軸の最小値
-                ymax = 1.0  # 数直線y軸の最大値
+                ymax = 1.1  # 数直線y軸の最大値
                 ymid = default_threshold.value
                 fear_state_time = np.zeros(100)
                 fear_state_flag = False
@@ -117,18 +122,25 @@ def draw_graph(default_threshold, connecting_ecg_flag, heart_sampling_value, med
                     plt.scatter(meditation_sampling_value, heart_sampling_value, s=10, c="orange", alpha=0.3)  # 散布図
 
                     if (meditation_sampling_value[49] > 20) and (meditation_sampling_value[49] < 50) \
-                            and (heart_sampling_value[49] > ymid) and (heart_sampling_value[49] < 1.0):
+                            and (heart_sampling_value[49] > (ymid+0.2)) and (heart_sampling_value[49] < 1.0):
                         axU.tick_params(labelbottom=False, bottom=False)  # x軸設定
                         axU.tick_params(labelleft=False, left=False)  # y軸設定
-                        axU.text(0.1, 0.1, "Fear_State", size=40, color="blue")
+                        axU.text(0.1, 0.2, "Fear_State", size=40, color="blue")
                         fear_state_flag = True
                         fear_state_time = np.append(fear_state_time, dt_now)
                         fear_state_time = np.delete(fear_state_time, 0)
                         axUR.tick_params(labelbottom=False, bottom=False)  # x軸設定
                         axUR.tick_params(labelleft=False, left=False)  # y軸設定
                         fear_time = "Time : \n{}"
-                        axUR.text(0.1, 0.1, fear_time.format(dt_now), size=10, color="black")
-                        print(dt_now)
+                        axUR.text(0.1, 0.2, fear_time.format(dt_now), size=20, color="black")
+
+                        with open(filename, 'a') as f:
+                            writer = csv.writer(f)
+                            writer.writerows([dt_now.strftime("%Y-%m-%d %H:%M:%S")])
+                            writer.writerows(["恐怖状態:(" + str(meditation_sampling_value[49]) + ",  "
+                                            + str(heart_sampling_value[49]) + ")"])
+                            writer.writerow(meditation_sampling_value)
+                            writer.writerow(heart_sampling_value)
 
                     else:
                         axU.cla()
@@ -140,7 +152,15 @@ def draw_graph(default_threshold, connecting_ecg_flag, heart_sampling_value, med
                         axUR.tick_params(labelleft=False, left=False)  # y軸設定
                         axUR.text(0.1, 0.1, "", size=10, color="black")
 
-                if (ymid > 0.4) and (not line_flag):
+                        with open(filename, 'a') as f:
+                            writer = csv.writer(f)
+                            writer.write([dt_now.strftime("%Y-%m-%d %H:%M:%S")])
+                            writer.write(["非恐怖状態:(" + str(meditation_sampling_value[49]) + ",  "
+                                            + str(heart_sampling_value[49]) + ")"])
+                            writer.writerow(meditation_sampling_value)
+                            writer.writerow(heart_sampling_value)
+
+                if (ymid > 0.4) and (not line_flag) and (meditation_sampling_value[0] != 0):
                     axA.hlines([ymid], xmin, xmax, color='black')  # x_hlines
                     axA.vlines([xmid], ymin, ymax, color='black')  # y_hlines
                     print('a')
@@ -170,14 +190,15 @@ if __name__ == "__main__":
     meditation_sampling_value = Array('f', 50)
 
     # ユーザ名の入力
+    print("ユーザ名を入力してください : ", end="")
     username = input()
     print(username, 'さんのバイタルデータを取得します')
 
-    process1 = Process(target=Get_ECG.get_ecg, args=[default_threshold, connecting_ecg_flag, username,
+    process1 = Process(target=Get_ECG.get_ecg, args=[default_threshold, connecting_ecg_flag,
                                                      heart_sampling_value, meditation_sampling_value])
     process2 = Process(target=get_eeg, args=[default_threshold, connecting_ecg_flag,
                                              heart_sampling_value, meditation_sampling_value])
-    process3 = Process(target=draw_graph, args=[default_threshold, connecting_ecg_flag,
+    process3 = Process(target=draw_graph, args=[default_threshold, connecting_ecg_flag, username,
                                                 heart_sampling_value, meditation_sampling_value])
 
     process1.start()

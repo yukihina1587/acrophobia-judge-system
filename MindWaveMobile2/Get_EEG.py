@@ -6,7 +6,7 @@ import numpy as np
 import socket
 import struct
 
-PORT = 'COM5'
+PORT = 'COM4'
 
 
 def get_eeg():
