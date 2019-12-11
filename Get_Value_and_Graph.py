@@ -136,9 +136,9 @@ def draw_graph(default_threshold, connecting_ecg_flag, username, heart_sampling_
 
                         with open(filename, 'a') as f:
                             writer = csv.writer(f)
-                            writer.writerows([dt_now.strftime("%Y-%m-%d %H:%M:%S")])
-                            writer.writerows(["恐怖状態:(" + str(meditation_sampling_value[49]) + ",  "
-                                            + str(heart_sampling_value[49]) + ")"])
+                            writer.writerow([dt_now.strftime("%Y-%m-%d %H:%M:%S")])
+                            writer.writerow(["恐怖状態", ":(", str(meditation_sampling_value[49]), ",  ",
+                                            str(heart_sampling_value[49]) + ")"])
                             writer.writerow(meditation_sampling_value)
                             writer.writerow(heart_sampling_value)
 
@@ -154,22 +154,21 @@ def draw_graph(default_threshold, connecting_ecg_flag, username, heart_sampling_
 
                         with open(filename, 'a') as f:
                             writer = csv.writer(f)
-                            writer.write([dt_now.strftime("%Y-%m-%d %H:%M:%S")])
-                            writer.write(["非恐怖状態:(" + str(meditation_sampling_value[49]) + ",  "
-                                            + str(heart_sampling_value[49]) + ")"])
+                            writer.writerow([dt_now.strftime("%Y-%m-%d %H:%M:%S")])
+                            writer.writerow(["非恐怖状態", ":(", str(meditation_sampling_value[49]), ",  ",
+                                            str(heart_sampling_value[49]) + ")"])
                             writer.writerow(meditation_sampling_value)
                             writer.writerow(heart_sampling_value)
 
                 if (ymid > 0.4) and (not line_flag) and (meditation_sampling_value[0] != 0):
                     axA.hlines([ymid], xmin, xmax, color='black')  # x_hlines
                     axA.vlines([xmid], ymin, ymax, color='black')  # y_hlines
-                    print('a')
                     line_flag = True
 
                 x_line_width = 10  # x軸目盛り数値の刻み幅
                 y_line_width = 0.1  # y軸目盛り数値の刻み幅
-                plt.xticks(np.arange(xmin, xmax + x_line_width, x_line_width))  # x軸目盛り数値
-                plt.yticks(np.arange(ymin, ymax + y_line_width, y_line_width))  # y軸目盛り数値
+                plt.xticks(np.arange(xmin, xmax, x_line_width))  # x軸目盛り数値
+                plt.yticks(np.arange(ymin, ymax, y_line_width))  # y軸目盛り数値
 
                 pylab.box(False)  # 枠を消す
                 plt.pause(.01)
