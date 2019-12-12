@@ -16,7 +16,7 @@ int R_flag = 0;
 int R_time = 0;
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
 }
 
 void loop() {
@@ -34,7 +34,7 @@ void loop() {
       if(peak <= ECG[i] && R_flag == 0){
         peak = ECG[i];
         R_time = timer[i];
-      }else if((peak - 300) > ECG[i] && (timer[i] - R_time) < 500){
+      }else if((peak - 200) > ECG[i] && (timer[i] - R_time) < 500){
         R_flag = 1;
         if(R_flag == 1){
           peak = 0;
@@ -46,9 +46,6 @@ void loop() {
             R[0] = R[1];
             R[1] = timer[i];
             RRI = R[1] - R[0];
-            //Serial.write("H");    //ヘッダの送信
-            //Serial.write(lowByte(RRI));    //下位バイトの送信
-            //Serial.write(highByte(RRI));    //上位バイトの送信
             Serial.print(RRI, DEC);
           }
           R_flag = 0;
