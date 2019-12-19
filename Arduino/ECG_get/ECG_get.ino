@@ -14,6 +14,8 @@ int peak = 0;
 int R_flag = 0;
 //一時的な時間格納
 int R_time = 0;
+//ミリ秒の獲得
+int time_m = 0;
 
 void setup() {
   Serial.begin(9600);
@@ -24,12 +26,13 @@ void loop() {
   int heartValue = analogRead(heartPin);
   //タイマーのインクリメントを行う
   m_status_check_handle();
+  time_m = millis();
 
   //取得した最近10個の心拍データを配列に先頭から順に代入
   for(int i = 0; i < 10; i++){
     if(i == 9){
       ECG[i] = heartValue;
-      timer[i] = timer_num;
+      timer[i] = time_m;
       //RRI数値を閾値から割り出す
       if(peak <= ECG[i] && R_flag == 0){
         peak = ECG[i];
