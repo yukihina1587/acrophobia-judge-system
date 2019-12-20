@@ -9,7 +9,7 @@ import datetime
 
 def get_ecg(default_threshold, ecg_flag, heart_value, medi_array):
 
-    with serial.Serial('COM6', 115200, timeout=0) as ser:
+    with serial.Serial('COM6', 9600, timeout=None) as ser:
         # 初期化
         i = 0
         x = np.zeros(50)
@@ -31,22 +31,23 @@ def get_ecg(default_threshold, ecg_flag, heart_value, medi_array):
         while True:
             try:
                 dt_now = datetime.datetime.now()
-                rri_data = ser.read_all()
+                rri_data = ser.readline()
                 rri_data_str = rri_data.decode('utf-8')
 
                 if rri_data_str != '':
                     int_data = int(rri_data_str)
+                    print(int_data)
 
-                    if (50 < int_data) and (int_data < 300):
+                    if (200 < int_data) and (int_data < 1500):
                         # 配列をキューと見たてて要素を追加・削除
                         x = np.append(x, int_data)
                         x = np.delete(x, 0)
 
-                        if x[0] > 50:
+                        if x[0] > 200:
                             # RRIの平均・分散を計算
                             s = sum(x)
-                            N = len(x)
-                            ave_rri = s / N
+                            sampling_data_set = len(x)
+                            ave_rri = s / sampling_data_set
 
                             for index in range(sampling_data_set):
                                 sdnn_sigma += (x[index] - ave_rri) ** 2
