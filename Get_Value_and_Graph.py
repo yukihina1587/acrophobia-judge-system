@@ -155,7 +155,7 @@ def draw_graph(default_threshold, connecting_ecg_flag, username, heart_sampling_
                         with open(filename, 'a') as f:
                             writer = csv.writer(f)
                             writer.writerow([dt_now.strftime("%Y-%m-%d %H:%M:%S")])
-                            writer.writerow(["非恐怖状態", ":(", str(meditation_sampling_value[49]), ",  ",
+                            writer.writerow(["平常状態", ":(", str(meditation_sampling_value[49]), ",  ",
                                             str(heart_sampling_value[49]) + ")"])
                             writer.writerow(meditation_sampling_value)
                             writer.writerow(heart_sampling_value)
