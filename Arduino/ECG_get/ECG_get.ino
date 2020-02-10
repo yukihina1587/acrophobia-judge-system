@@ -51,11 +51,6 @@ void loop() {
               RRI = R[1] - R[0];
               if(RRI > 200){
                 Serial.println(RRI, DEC);
-                //int h = highByte(RRI);
-                //int l = lowByte(RRI);
-                //h = h << 8;
-                //int hl = h + l;
-                //Serial.write(hl);
               }
             }
             R_flag = 0;

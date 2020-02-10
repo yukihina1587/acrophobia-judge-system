@@ -43,12 +43,6 @@ def send_eeg(flag, value):
     flag_and_value = flag + value
     # サーバにメッセージを送る
     s.sendall(flag_and_value)
-    # ネットワークのバッファサイズは1024。サーバからの文字列を取得する
-    # data = s.recv(4096)
-    # print(repr(data))
-    # if str(data) != ('Received: ' + value):
-        # print 'a'
-        # send_eeg(flag, value)
 
 
 if __name__ == "__main__":
